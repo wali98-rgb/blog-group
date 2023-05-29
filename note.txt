@@ -1,0 +1,52 @@
+*// Aplikasi Sosial Media (Social Media Apk) //*
+
+//*// Database
+
+Nama: db_sosmed
+jumlah table: 1
+
+//*// Table
+
+Nama Table 1 : users;
+    - id_user INT(3) Auto_Increment Primary_Key NOT NULL,
+    - username VARCHAR(40) NULL,
+    - password VARCHAR(10) NULL,
+    - email VARCHAR(20) NULL,
+    - level Enum('Admin', 'User') NOT NULL
+
+//*// FlowChart Sosmed
+
+Start
+  ||
+  \/
+Dashboard <====================================================================================
+  ||                                                                                           \\
+  \/                                                                                            ||
+Action Guest                                                                                    ||
+  ||                                                                                            ||
+  \/                                                                                            ||
+Scroll Content          ==========================================================              ||
+  ||                   ||                                                         \\            ||
+  \/                   \/                                                          ||           ||
+Scroll? ========No=> Login => Have an Account => Have? =No=> Registration => Create Account     ||
+  ||                                              ||                                            ||
+  Yes                                             Yes                                           ||
+  ||                                              ||                                            No
+  \/                                              \/                                            ||
+Looked Content                                   Login                                          ||
+  ||                                              ||                                            ||
+  \/                                              \/                                            ||
+ End <=================                      Open Dashboard                                     ||
+  /\                   \\                         ||                                            ||
+  ||                    \\                        \/                                            ||
+  ||                      ================= Action Actifity <==========                         ||
+  ||                                              ||                   \\                       ||
+  ||                                              \/                    ||                      ||
+  ||                                            Logout                  Yes                     ||
+  ||                                              ||                    ||                      ||
+   \\                                             \/                   //                       ||
+     ========================================== Logout? ===============                         ||
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ||                                            ||
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ||                                            ||
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  \\                                           //
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    ===========================================
