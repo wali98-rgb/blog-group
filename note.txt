@@ -1,9 +1,11 @@
-*// Aplikasi Sosial Media (Social Media Apk) //*
+*// Aplikasi Blog (Blog Apk) //*
+
+Nama Aplikasi : Independent News
 
 //*// Database
 
-Nama: db_sosmed
-jumlah table: 1
+Nama: db_blog
+Jumlah table: 4
 
 //*// Table
 
@@ -14,39 +16,26 @@ Nama Table 1 : users;
     - email VARCHAR(20) NULL,
     - level Enum('Admin', 'User') NOT NULL
 
-//*// FlowChart Sosmed
+Nama Table 2 : categories;
+    - id_category INT(3) Auto_Increment Primary_Key NOT NULL,
+    - name_category VARCHAR(30) NULL {
+      - Political,
+      - Food,
+      - Traffic,
+      - Daily New,
+      - Entertainment,
+      - Science,
+      - Sport
+    }
 
-Start
-  ||
-  \/
-Dashboard <====================================================================================
-  ||                                                                                           \\
-  \/                                                                                            ||
-Action Guest                                                                                    ||
-  ||                                                                                            ||
-  \/                                                                                            ||
-Scroll Content          ==========================================================              ||
-  ||                   ||                                                         \\            ||
-  \/                   \/                                                          ||           ||
-Scroll? ========No=> Login => Have an Account => Have? =No=> Registration => Create Account     ||
-  ||                                              ||                                            ||
-  Yes                                             Yes                                           ||
-  ||                                              ||                                            No
-  \/                                              \/                                            ||
-Looked Content                                   Login                                          ||
-  ||                                              ||                                            ||
-  \/                                              \/                                            ||
- End <=================                      Open Dashboard                                     ||
-  /\                   \\                         ||                                            ||
-  ||                    \\                        \/                                            ||
-  ||                      ================= Action Actifity <==========                         ||
-  ||                                              ||                   \\                       ||
-  ||                                              \/                    ||                      ||
-  ||                                            Logout                  Yes                     ||
-  ||                                              ||                    ||                      ||
-   \\                                             \/                   //                       ||
-     ========================================== Logout? ===============                         ||
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ||                                            ||
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ||                                            ||
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  \\                                           //
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    ===========================================
+Nama Table 3 : aticles;
+    - id_article INT(3) Auto_Increment Primary_Key NOT NULL,
+    - cover_article VARCHAR(40) NULL,
+    - title_article VARCHAR(40) NULL,
+    - desc_article LONGTEXT(500) NULL,
+    - id_category INT(30) NULL
+
+Nama Table 4 : reviews;
+    - id_review INT(3) Auto_Increment Primary_Key NOT NULL,
+    - user_review VARCHAR(40) NULL,
+    - interest_review INT(10) NULL
