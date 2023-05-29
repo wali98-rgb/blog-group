@@ -27,17 +27,23 @@
 
     <!-- Register Form Start -->
     <main>
+        <h1>Register Form</h1>
         <form action="regis-action.php" method="POST">
-            <label for="username">Username :</label>
-            <input type="text" name="username" id="username" placeholder="Username"> <br>
-            <label for="email">Email :</label>
-            <input type="email" name="email" id="email" placeholder="example@gmail.com"> <br>
-            <label for="password">Password :</label>
-            <input type="password" name="password" id="password" placeholder="Password"> <br>
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username" autofocus required>
+            </div>
 
-            <input type="sumbit" name="simpan" id="" value="Register">
+            <div>
+                <input type="email" name="email" id="email" placeholder="example@gmail.com" required>
+            </div>
+
+            <div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+
+            <input type="submit" name="simpan" id="" value="Register">
         </form>
-        <small>Already Registereda? <a href="../login/login.php">Login</a></small>
+        <small>Already Registered? <a href="../login/login.php">Login</a></small>
     </main>
     <!-- Register Form End -->
 
