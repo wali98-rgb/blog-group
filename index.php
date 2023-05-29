@@ -7,6 +7,7 @@
     <title>Dashboard | I-News</title>
 </head>
 <body>
+    <header>Dashboard</header>
     
 </body>
 </html>
