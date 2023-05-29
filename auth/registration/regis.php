@@ -26,6 +26,19 @@
     <!-- Navbar End -->
 
     <!-- Register Form Start -->
+    <main>
+        <form action="regis-action.php" method="POST">
+            <label for="username">Username :</label>
+            <input type="text" name="username" id="username" placeholder="Username"> <br>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="example@gmail.com"> <br>
+            <label for="password">Password :</label>
+            <input type="password" name="password" id="password" placeholder="Password"> <br>
+
+            <input type="sumbit" name="simpan" id="" value="Register">
+        </form>
+        <small>Already Registereda? <a href="../login/login.php">Login</a></small>
+    </main>
     <!-- Register Form End -->
 
     <!-- Footer Start -->
