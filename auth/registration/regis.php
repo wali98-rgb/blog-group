@@ -12,15 +12,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <!-- My Feather Icons -->
-    <!-- choose one -->
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- My Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,100;1,200;1,300;1,400;1,600;1,800&display=swap" rel="stylesheet">
     
-    <title>Document</title>
+    <title>Register Page | I-News</title>
 </head>
 <body>
-    
+    <!-- Navbar Start -->
+    <!-- Navbar End -->
 
+    <!-- Register Form Start -->
+    <!-- Register Form End -->
+
+    <!-- Footer Start -->
+    <!-- Footer End -->
+    
     <!-- My Feather Icons JS -->
     <script>
         feather.replace()
