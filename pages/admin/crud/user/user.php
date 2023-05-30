@@ -32,7 +32,7 @@
         <div>
             <span>Dashboard</span>
             <a href="#">Search</a>
-            <a href="../../auth/logout.php">Logout</a>
+            <a href="../../../../auth/logout.php">Logout</a>
         </div>
         <!-- Navbar Nav End -->
     </nav>
