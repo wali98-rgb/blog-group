@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Bulan Mei 2023 pada 08.07
+-- Waktu pembuatan: 30 Bulan Mei 2023 pada 07.14
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -43,8 +43,17 @@ CREATE TABLE `articles` (
 
 CREATE TABLE `categories` (
   `id_category` int(3) NOT NULL,
-  `name_category` varchar(30) NOT NULL
+  `name_category` varchar(30) NOT NULL,
+  `slug_category` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `categories`
+--
+
+INSERT INTO `categories` (`id_category`, `name_category`, `slug_category`) VALUES
+(1, 'Political', 'political'),
+(2, 'Food', 'food');
 
 -- --------------------------------------------------------
 
@@ -122,7 +131,7 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `reviews`
