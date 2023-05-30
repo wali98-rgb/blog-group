@@ -19,46 +19,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,100;1,200;1,300;1,400;1,600;1,800&display=swap" rel="stylesheet">
     
-    <title>Login Page | I-News</title>
+    <title>Review Page | I-News</title>
 </head>
 <body>
     <!-- Navbar Start -->
+    <nav>
+        <!-- Navbar Logo Start -->
+        <h1>Independent<span>News</span>.</h1>
+        <!-- Navbar Logo End -->
+
+        <!-- Navbar Nav Start -->
+        <div>
+            <span>Dashboard</span>
+            <a href="#">Search</a>
+            <a href="../../auth/logout.php">Logout</a>
+        </div>
+        <!-- Navbar Nav End -->
+    </nav>
     <!-- Navbar End -->
 
-    <!-- Check Login Start -->
-    <?php
-        session_start();
-        
-        if (isset($_SESSION['status'])) {
-            if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
-                header('location:../../pages/admin/index.php');
-            } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
-                header('location:../../pages/user/index.php');
-            } else if ($_SESSION['status'] == "logout") {
-                header('location:login.php');
-            }
-        }
-    ?>
-    <!-- Check Login End -->
+    <!-- Sidebar Start -->
+    <section>
+        <div>
+            <!-- Username Admin Start -->
+            <ul>
+                <li><?php echo $_SESSION['username']; ?></li>
+            </ul>
+            <!-- Username Admin End -->
+
+            <!-- Button Action Start -->
+            <ul>
+                <li><a href="../../index.php">Dashboard</a></li>
+                <li><a href="../article/article.php">Articles</a></li>
+                <li><a href="../category/category.php">Category</a></li>
+                <li><a href="../user/user.php">User</a></li>
+                <li><a href="review.php">Review</a></li>
+
+                <!-- Partition Start -->
+                <hr size="2px" color="black">
+                <!-- Partition End -->
+
+                <!-- User Page Start -->
+                <span>User Page</span> <br>
+                <a href="../../../user/index.php">View User Page</a>
+                <!-- User Page End -->
+            </ul>
+            <!-- Button Action End -->
+        </div>
+    </section>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
     
-    <!-- Login Form Start -->
-    <main>
-        <h1>Login Page</h1>
-        <form action="login-check.php" method="POST">
-            <div>
-                <input type="text" name="username" id="username" placeholder="Username" autofocus required>
-            </div>
-
-            <div>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-            </div>
-
-            <input type="submit" name="login" id="" value="Login">
-        </form>
-        <small>Not Registered? <a href="../registration/regis.php">Register</a></small>
-    </main>
-    <!-- Login Form End -->
-
+    <!-- Content End -->
+    
     <!-- Footer Start -->
     <!-- Footer End -->
     

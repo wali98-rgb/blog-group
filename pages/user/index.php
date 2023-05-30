@@ -3,9 +3,11 @@ Dashboard User
 
 <?php
     session_start();
-    if ($_SESSION['status'] == "login") {
-        echo $_SESSION['username'];
-    } else if ($_SESSION['status'] != "login") {
+    if (isset($_SESSION['status'])) {
+        if ($_SESSION['status'] == "login") {
+            echo $_SESSION['username'];
+        } else if ($_SESSION['status'] != "login") {
+    }
 ?>
     <h1>Wellcome</h1>
 <?php
