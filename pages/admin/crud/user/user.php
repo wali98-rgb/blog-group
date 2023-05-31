@@ -87,6 +87,8 @@
         
         <!-- Card Content Start -->
         <div>
+            <a href="create.php">Create User</a>
+            <hr>
             <table>
                 <tr>
                     <th>#</th>
@@ -108,9 +110,9 @@
                     <td><?php echo $d['username']; ?></td>
                     <td><?php echo $d['email']; ?></td>
                     <td>
-                        <a href="show.php">View</a>
-                        <a href="update.php">Edit</a>
-                        <a href="delete.php">Delete</a>
+                        <a href="show.php?id_user=<?php echo $d['id_user']; ?>">View</a>
+                        <a href="update.php?id_user=<?php echo $d['id_user']; ?>">Edit</a>
+                        <a href="delete.php?id_user=<?php echo $d['id_user']; ?>">Delete</a>
                     </td>
                 </tr>
                 <?php
