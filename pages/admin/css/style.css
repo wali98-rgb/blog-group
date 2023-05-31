@@ -1,3 +1,7 @@
 .navbar.a {
   font-weight: bold;
 }
+.navbar .container-fluid {
+  display: flex;
+  align-items: center;
+}
