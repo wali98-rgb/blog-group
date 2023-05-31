@@ -1,34 +1,3 @@
-<?php
-include "../../../../connection/connection.php";
-
-// Fungsi untuk mengambil daftar kategori dari database
-function getCategories()
-{
-    global $con;
-
-    $query = "SELECT * FROM categories";
-    $result = mysqli_query($con, $query);
-
-    $categories = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $categories[] = $row;
-    }
-
-    return $categories;
-}
-
-// Menambahkan kategori baru jika ada data yang dikirimkan
-if (isset($_POST['name_category'])) {
-    $categoryName = $_POST['name_category'];
-
-    $query = "INSERT INTO categories (name_category) VALUES ('$categoryName')";
-    mysqli_query($con, $query);
-}
-
-// Menggunakan fungsi untuk mendapatkan daftar kategori
-$categories = getCategories();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +14,7 @@ $categories = getCategories();
     <!-- My Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <!-- My Font -->
+    <!-- My Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,100;1,200;1,300;1,400;1,600;1,800&display=swap" rel="stylesheet">
@@ -54,20 +23,129 @@ $categories = getCategories();
 </head>
 
 <body>
-    <!-- Form untuk menambahkan kategori baru -->
-    <h2>Tambah Kategori Baru</h2>
-    <form method="POST" action="">
-        <input type="text" name="name_category" placeholder="Nama Kategori" required>
-        <button type="submit">Tambah</button>
-    </form>
+    <!-- Check Login Start -->
+    <?php
+        if (session_start()) {
+            if ($_SESSION['status'] != "login") {
+                header('location:../../auth/login/login.php');
+            } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                header('location:../user/index.php');
+            }
+        }
+    ?>
+    <!-- Check Login End -->
+    
+    <!-- Navbar Start -->
+    <nav>
+        <!-- Navbar Logo Start -->
+        <h1>Independent<span>News</span>.</h1>
+        <!-- Navbar Logo End -->
 
-    <!-- Menampilkan daftar kategori -->
-    <h2>Daftar Kategori</h2>
-    <ul>
-        <?php foreach ($categories as $category) : ?>
-            <li><?= $category['name_category']; ?></li>
-        <?php endforeach; ?>
-    </ul>
+        <!-- Navbar Nav Start -->
+        <div>
+            <span>Dashboard</span>
+            <a href="#">Search</a>
+            <a href="../../../../auth/logout.php">Logout</a>
+        </div>
+        <!-- Navbar Nav End -->
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Sidebar Start -->
+    <section>
+        <div>
+            <!-- Username Admin Start -->
+            <ul>
+                <li><?php echo $_SESSION['username']; ?></li>
+            </ul>
+            <!-- Username Admin End -->
+
+            <!-- Button Action Start -->
+            <ul>
+                <li><a href="../../index.php">Dashboard</a></li>
+                <li><a href="../article/article.php">Articles</a></li>
+                <li><a href="category.php">Category</a></li>
+                <li><a href="../user/user.php">User</a></li>
+                <li><a href="../review/review.php">Review</a></li>
+
+                <!-- Partition Start -->
+                <hr size="2px" color="black">
+                <!-- Partition End -->
+
+                <!-- User Page Start -->
+                <span>User Page</span> <br>
+                <a href="../../../user/index.php">View User Page</a>
+                <!-- User Page End -->
+            </ul>
+            <!-- Button Action End -->
+        </div>
+    </section>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->    
+    <section>
+        <h1>Category Page</h1>
+        <!-- Card Content Start -->
+        <div>
+            <a href="create.php">Create Category</a>
+            <hr>
+            <!-- Show Category List -->
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Name Category</th>
+                    <th>Slug Category</th>
+                    <th>Action</th>
+                </tr>
+                
+                <?php
+                    include "../../../../connection/connection.php";
+
+                    $data = mysqli_query($con, "select * from categories");
+
+                    $no = 1;
+                    while ($d = mysqli_fetch_array($data)) {
+                ?>
+                
+                <tr>
+                    <td><?php echo $no++; ?></td>
+                    <td>
+                        <?php echo $d['name_category']; ?>
+                    </td>
+                    <td>
+                        <?php echo $d['slug_category']; ?>
+                    </td>
+                    <td>
+                        <a href="update.php?slug=<?php echo $d['slug_category']; ?>">Edit</a>
+                        <a href="delete.php?slug=<?php echo $d['slug_category']; ?>">Delete</a>
+                    </td>
+                </tr>
+
+                <?php } ?>
+
+                <tr>
+                    <th>#</th>
+                    <th>Name Category</th>
+                    <th>Slug Category</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+        <!-- Card Content End -->
+    </section>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <!-- Footer End -->
+
+    <!-- My Feather Icons JS -->
+    <script>
+        feather.replace()
+    </script>
+
+    <!-- My Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 </body>
 
 </html>
