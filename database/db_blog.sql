@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Bulan Mei 2023 pada 07.14
+-- Waktu pembuatan: 31 Bulan Mei 2023 pada 07.51
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -87,7 +87,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id_user`, `username`, `password`, `email`, `level`) VALUES
 (1, 'wali', '12344321', 'wali@gmail', 'Admin'),
-(2, 'brian', '123321', '123321', 'User');
+(2, 'brian', '123321', '123321', 'User'),
+(4, 'dapit', '123', 'dapits@gmail.com', 'User');
 
 --
 -- Indexes for dumped tables
@@ -143,7 +144,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
