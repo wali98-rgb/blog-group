@@ -15,12 +15,12 @@
 
     <!-- My Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <!-- My Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,100;1,200;1,300;1,400;1,600;1,800&display=swap" rel="stylesheet">
-    
+
     <!-- logo -->
     <link rel="icon" href="..\..\img\logo\logo_nb.png">
     <title>Admin Page | I-News</title>
@@ -38,7 +38,7 @@
     }
     ?>
     <!-- Check Login End -->
-    
+
     <!-- Navbar Start -->
     <nav>
         <nav class="navbar bg-light">
@@ -60,13 +60,19 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="index.php">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="crud/article/article.php">Article</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/user/user.php">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/review/review.php">Review</a>
                         </li>
                     </ul>
                 </div>
