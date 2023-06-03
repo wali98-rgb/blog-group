@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2023 pada 06.54
+-- Waktu pembuatan: 03 Jun 2023 pada 18.17
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -62,7 +62,24 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id_category`, `name_category`, `slug_category`) VALUES
 (1, 'Political', 'political'),
-(2, 'Food', 'food');
+(2, 'Food', 'food'),
+(4, 'Traffic', 'traffic');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `reports`
+--
+
+CREATE TABLE `reports` (
+  `id_report` int(3) NOT NULL,
+  `title_report` varchar(40) NOT NULL,
+  `category_report` varchar(30) NOT NULL,
+  `review_report` int(10) NOT NULL,
+  `id_article` int(3) NOT NULL,
+  `id_category` int(3) NOT NULL,
+  `id_review` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -73,8 +90,17 @@ INSERT INTO `categories` (`id_category`, `name_category`, `slug_category`) VALUE
 CREATE TABLE `reviews` (
   `id_review` int(3) NOT NULL,
   `user_review` varchar(40) NOT NULL,
-  `interest_review` int(10) NOT NULL
+  `interest_review` int(10) NOT NULL,
+  `id_article` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `reviews`
+--
+
+INSERT INTO `reviews` (`id_review`, `user_review`, `interest_review`, `id_article`) VALUES
+(1, 'brian', 1, 2),
+(2, 'brian', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -87,7 +113,7 @@ CREATE TABLE `users` (
   `username` varchar(40) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(25) NOT NULL,
-  `level` enum('Admin','User') NOT NULL
+  `level` enum('Admin','User','Journalist') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -116,6 +142,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id_category`);
 
 --
+-- Indeks untuk tabel `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id_report`);
+
+--
 -- Indeks untuk tabel `reviews`
 --
 ALTER TABLE `reviews`
@@ -141,13 +173,19 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id_report` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id_review` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_review` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

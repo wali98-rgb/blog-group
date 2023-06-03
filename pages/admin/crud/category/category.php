@@ -119,56 +119,67 @@
         <!-- Sidebar End -->
 
         <!-- Content Start -->
-        <section>
-            <h1>Category Page</h1>
-            <!-- Card Content Start -->
-            <div>
-                <a href="create.php">Create Category</a>
-                <hr>
-                <!-- Show Category List -->
-                <table>
-                    <tr>
-                        <th>#</th>
-                        <th>Name Category</th>
-                        <th>Slug Category</th>
-                        <th>Action</th>
-                    </tr>
+        <div class="content-wrapper">
+            <section class="content">
+                <!-- Card Content Start -->
+                <div class="container-fluid">
+                    <h1>Category Page</h1>
+                    <a class="btn btn-success mb-2" href="create.php">Create Category</a>
+                    <!-- Show Category List -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Category List</h3>
+                        </div>
+                        
+                        <!-- Card Session Start -->
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr align="center">
+                                    <th>#</th>
+                                    <th>Name Category</th>
+                                    <th>Slug Category</th>
+                                    <th>Action</th>
+                                </tr>
 
-                    <?php
-                    include "../../../../connection/connection.php";
+                                <?php
+                                include "../../../../connection/connection.php";
 
-                    $data = mysqli_query($con, "select * from categories");
+                                $data = mysqli_query($con, "select * from categories");
 
-                    $no = 1;
-                    while ($d = mysqli_fetch_array($data)) {
-                    ?>
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                ?>
 
-                        <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td>
-                                <?php echo $d['name_category']; ?>
-                            </td>
-                            <td>
-                                <?php echo $d['slug_category']; ?>
-                            </td>
-                            <td>
-                                <a href="update.php?slug=<?php echo $d['slug_category']; ?>">Edit</a>
-                                <a href="delete.php?slug=<?php echo $d['slug_category']; ?>">Delete</a>
-                            </td>
-                        </tr>
+                                    <tr align="center">
+                                        <td><?php echo $no++; ?></td>
+                                        <td>
+                                            <?php echo $d['name_category']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $d['slug_category']; ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-warning" href="update.php?slug=<?php echo $d['slug_category']; ?>">Edit</a>
+                                            <a class="btn btn-danger" href="delete.php?slug=<?php echo $d['slug_category']; ?>">Delete</a>
+                                        </td>
+                                    </tr>
 
-                    <?php } ?>
+                                <?php } ?>
 
-                    <tr>
-                        <th>#</th>
-                        <th>Name Category</th>
-                        <th>Slug Category</th>
-                        <th>Action</th>
-                    </tr>
-                </table>
-            </div>
-            <!-- Card Content End -->
-        </section>
+                                <tr align="center">
+                                    <th>#</th>
+                                    <th>Name Category</th>
+                                    <th>Slug Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- Card Session End -->
+                    </div>
+                </div>
+                <!-- Card Content End -->
+            </section>
+        </div>
         <!-- Content End -->
 
         <!-- Footer Start -->
