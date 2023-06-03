@@ -86,18 +86,6 @@
         </nav>
         <!-- Navbar End -->
 
-        <!-- Check Login Start -->
-        <?php
-        if (session_start()) {
-            if ($_SESSION['status'] != "login") {
-                header('location:../../auth/login/login.php');
-            } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
-                header('location:../user/index.php');
-            }
-        }
-        ?>
-        <!-- Check Login End -->
-
         <!-- Sidebar Start -->
         <section>
             <div>
