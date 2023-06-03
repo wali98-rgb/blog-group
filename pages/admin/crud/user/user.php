@@ -118,52 +118,63 @@
         <!-- Sidebar End -->
 
         <!-- Content Start -->
-        <section>
-            <h1>User Page</h1>
+        <div class="content-wrapper">
+            <section class="content">
+                <!-- Card Content Start -->
+                <div class="container-fluid">
+                    <h1>User Page</h1>
+                    <a class="btn btn-success mb-2" href="create.php">Create User</a>
+                    <!-- Show User List -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">User List</h3>
+                        </div>
 
-            <!-- Card Content Start -->
-            <div>
-                <a href="create.php">Create User</a>
-                <hr>
-                <table>
-                    <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
+                        <!-- Card Session Start -->
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr align="center">
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
 
-                    <?php
-                    include "../../../../connection/connection.php";
+                                <?php
+                                include "../../../../connection/connection.php";
 
-                    $data = mysqli_query($con, "select * from users where level = 'User'");
+                                $data = mysqli_query($con, "select * from users where level = 'User'");
 
-                    $no = 1;
-                    while ($d = mysqli_fetch_array($data)) {
-                    ?>
-                        <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td><?php echo $d['username']; ?></td>
-                            <td><?php echo $d['email']; ?></td>
-                            <td>
-                                <a href="show.php?id_user=<?php echo $d['id_user']; ?>">View</a>
-                                <a href="update.php?id_user=<?php echo $d['id_user']; ?>">Edit</a>
-                                <a href="delete.php?id_user=<?php echo $d['id_user']; ?>">Delete</a>
-                            </td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                    <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </table>
-            </div>
-            <!-- Card Content End -->
-        </section>
+                                $no = 1;
+                                while ($d = mysqli_fetch_array($data)) {
+                                ?>
+                                    <tr align="center">
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $d['username']; ?></td>
+                                        <td><?php echo $d['email']; ?></td>
+                                        <td>
+                                            <a class="btn btn-primary" href="show.php?id_user=<?php echo $d['id_user']; ?>">View</a>
+                                            <a class="btn btn-warning" href="update.php?id_user=<?php echo $d['id_user']; ?>">Edit</a>
+                                            <a class="btn btn-danger" href="delete.php?id_user=<?php echo $d['id_user']; ?>">Delete</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                                <tr align="center">
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- Card Session End -->
+                    </div>
+                </div>
+                <!-- Card Content End -->
+            </section>
+        </div>
         <!-- Content End -->
 
         <!-- Footer Start -->
