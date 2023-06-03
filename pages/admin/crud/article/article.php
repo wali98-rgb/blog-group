@@ -56,6 +56,7 @@
                         <li class="nav-item">
                             <?php echo $_SESSION['username']; ?>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
