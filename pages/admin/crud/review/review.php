@@ -78,7 +78,7 @@
 
             <!-- Navbar Nav Start -->
             <div>
-                <span>Dashboard</span>
+                <span>Review</span>
                 <a href="#">Search</a>
                 <a href="../../auth/logout.php">Logout</a>
             </div>
@@ -118,7 +118,85 @@
         <!-- Sidebar End -->
 
         <!-- Content Start -->
+        <div class="content-wrapper">
+            <section class="content">
+                <!-- Card Content Start -->
+                <div class="container-fluid">
+                    <h1>Review Page</h1>
+                    <!-- Show Review Start -->
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Review List</h3>
+                        </div>
 
+                        <!-- Table Session Start -->
+                        <div class="card-body">
+                            <!-- Check Item Database Start -->
+                            <?php
+                                include "../../../../connection/connection.php";
+
+                                $no = 1;
+                                $data = mysqli_query($con, "select
+                                    articles.id_article, articles.title_article, articles.id_category,
+                                    categories.id_category, categories.name_category,
+                                    reviews.id_review, reviews.interest_review, reviews.id_article
+                                    from articles, categories, reviews
+                                    where articles.id_category=categories.id_category
+                                    and articles.id_article=reviews.id_article
+                                    order by articles.title_article asc
+                                ");
+                            ?>
+                            <!-- Check Item Database End -->
+                            <table class="table table-bordered">
+                            <thead>
+                                <tr align="center">
+                                    <th style="width: 10px">#</th>
+                                    <th>Title Article</th>
+                                    <th>Category Article</th>
+                                    <th style="width: 40px">Total Review</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Looping Data Start -->
+                                <?php
+                                    while ($d = mysqli_fetch_array($data)) {
+                                        $id_art = $d['id_article'];
+                                ?>
+                                <!-- Looping Data End -->
+                                <tr align="center">
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $d['title_article']; ?></td>
+                                    <td><?php echo $d['name_category']; ?></td>
+
+                                    <?php
+                                        // $r = mysqli_query($con, "select id_article, Count(interest_review) from reviews where id_article='$d[id_article]'");
+                                        // $inter = $r['interest_review'];
+                                        $val1 = $d['interest_review'];
+                                    ?>
+                                    
+                                    <td>
+                                        <span class="badge bg-danger"><?php echo $val1; ?></span>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                            <tfoot>
+                                <tr align="center">
+                                    <th style="width: 10px">#</th>
+                                    <th>Title Article</th>
+                                    <th>Category Article</th>
+                                    <th style="width: 40px">Total Review</th>
+                                </tr>
+                            </tfoot>
+                            </table>
+                        </div>
+                        <!-- Table Session End -->
+                    </div>
+                    <!-- Show Review End -->
+                </div>
+                <!-- Card Content End -->
+            </section>
+        </div>
         <!-- Content End -->
 
         <!-- Footer Start -->

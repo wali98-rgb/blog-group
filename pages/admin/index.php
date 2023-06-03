@@ -96,7 +96,7 @@
         <div>
             <!-- Username Admin Start -->
             <ul>
-                <!-- <li><?php echo $_SESSION['username']; ?></li> -->
+                <li><?php echo $_SESSION['username']; ?></li>
             </ul>
             <!-- Username Admin End -->
 
