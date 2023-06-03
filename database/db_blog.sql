@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2023 pada 07.51
+-- Waktu pembuatan: 03 Jun 2023 pada 06.54
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -31,9 +31,18 @@ CREATE TABLE `articles` (
   `id_article` int(3) NOT NULL,
   `cover_article` varchar(40) NOT NULL,
   `title_article` varchar(40) NOT NULL,
+  `slug_article` varchar(40) NOT NULL,
   `desc_article` longtext NOT NULL,
   `id_category` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `articles`
+--
+
+INSERT INTO `articles` (`id_article`, `cover_article`, `title_article`, `slug_article`, `desc_article`, `id_category`) VALUES
+(1, 'Avengers_Age_of_Ultron_poster.jpg', 'Hahakaka', 'hahakaka', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aspernatur, voluptatem rerum sit tempore sunt aliquam praesentium officiis recusandae quas alias consectetur voluptate expedita in ipsum quia! Cumque, libero voluptas.', 1),
+(2, 'asus.jpeg', 'Jma', 'jma', 'mkjenvak', 2);
 
 -- --------------------------------------------------------
 
@@ -126,13 +135,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `reviews`
