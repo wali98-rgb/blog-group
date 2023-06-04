@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | I-News</title>
 </head>
-<body>
-    <header>Dashboard</header>
+<body>    <header>Dashboard</header>
     
 </body>
 </html>
