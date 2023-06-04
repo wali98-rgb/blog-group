@@ -15,7 +15,7 @@
     />
 
     <!-- My Style -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/styles.css" />
 
     <!-- My Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -37,8 +37,8 @@
 </head>
 <body onload="displayDate()">
     <!-- Navbar start -->
-    <nav class="navbar">
-        <div class="date">
+    <nav class="navbars">
+        <div class="dates">
             <p id="tanggal"></p>
         </div>
 
@@ -46,7 +46,7 @@
             <a>The Independent News</a>
         </div>
 
-        <div class="navbar-nav">
+        <div class="navbars-nav">
             <a href="index.html" class="now">Home</a>
             <a href="display/kategori/nasional.html">Nasional</a>
             <a href="display/kategori/internasional.html">Internasional</a>
@@ -74,13 +74,13 @@
             ?>
         </div>
 
-        <div class="navbar-extra">
+        <div class="navbars-extra">
             <a href="#" id="search-button"><i data-feather="search"></i></a>
             <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
         </div>
 
         <!-- Search Form start -->
-        <div class="search-form">
+        <div class="search-forms">
             <input type="search" id="search-box" placeholder="search here..." />
             <label for="search-box"><i data-feather="search"></i></label>
         </div>
@@ -89,32 +89,14 @@
     <!-- Navbar end -->
     
     <!-- Content Start -->
-    <div class="content-wrapper">
-        <section class="content" style="padding: 0 7%">
+    <div class="content-wrapper" style="margin-top: 12rem;">
+        <section class="content" style="padding: 0 15%">
             <!-- Card Content Start -->
             <div class="container-fluid">
                 <div class="article">
                     <div class="jumbotron-fluid">
                         <h1 class="text-lg my-3">Berita Terkini.</h1>
                         <div class="d-flex berita">
-                            <img style="object-fit: cover;" src="img/j-g-plate.jpg" alt="Gambar Artikel Pertama">
-                            <div class="konten">
-                                <a href="#">Menkominfo Johnny G Plate ditahan sebagai tersangka, Istana tegaskan tak akan intervensi kasus dugaan korupsi pembangunan infrastruktur Kominfo</a>
-                                <p class="author">Pihak Istana mengatakan Presiden Joko Widodo tidak akan mengintervensi penyelesaian kasus dugaan korupsi yang menjerat Menteri Komunikasi dan Informasi (Menkominfo) Johnny G Plate.</p>
-                                <p class="date">17 Mei 2023</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Session -->
-                <div class="card card-default">
-                    <div class="card-header">
-                        <h3 class="card-title">Berita Lainnya</h3>
-                    </div>
-                    <!-- Show Article Start -->
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <!-- Check Item Database Start -->
                             <?php
                                 include "../../connection/connection.php";
 
@@ -125,19 +107,56 @@
                                     from articles, users, categories
                                     where articles.id_user=users.id_user
                                     and articles.id_category=categories.id_category
+                                    and articles.id_article='1'
                                     order by articles.title_article asc
                                 ");
 
-                                while ($d = mysqli_fetch_array($data)) {
+                                while ($dat = mysqli_fetch_array($data)) {
+                            ?>
+                            <img style="object-fit: cover;" src="<?php echo '../admin/crud/article/cover_article/' . $dat['cover_article']; ?>" alt="<?php echo $dat['title_article']; ?>">
+                            <div class="konten" style="text-align: justify; text-decoration: none;">
+                                <a href="show.php?slug=<?php echo $dat['slug_article']; ?>"><?php echo $dat['title_article']; ?></a>
+                                <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $dat['username']; ?></span></small>
+                                <p class="author"><?php echo substr($dat['desc_article'], 0, 200) . "..."; ?></p>
+                                <small style="display: flex; align-items: center;"><label for="">Kategori : &nbsp;</label><span class="text-danger"><?php echo $dat['name_category']; ?></span></small>
+                                <p class="date">17 Mei 2023</p>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Session -->
+                <div class="card-default">
+                    <div class="card-header mb-3">
+                        <h3 class="card-title">Berita Lainnya</h3>
+                    </div>
+                    <!-- Show Article Start -->
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <!-- Check Item Database Start -->
+                            <?php
+                                include "../../connection/connection.php";
+
+                                $datas = mysqli_query($con, "select
+                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_user, articles.id_category,
+                                    users.id_user, users.username,
+                                    categories.id_category, categories.name_category, categories.slug_category
+                                    from articles, users, categories
+                                    where articles.id_user=users.id_user
+                                    and articles.id_category=categories.id_category
+                                    order by articles.title_article asc
+                                ");
+
+                                while ($d = mysqli_fetch_array($datas)) {
                             ?>
                             <!-- Check Item Database End -->
-                            <div class="card col-3 m-2">
-                                <img style="height: 250px; object-fit: cover; width: 200px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
+                            <div class="col-3">
+                                <img style="height: 180px; object-fit: cover; width: 400px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
                                 <hr>
                                 <div class="card-body">
                                     <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
-                                    <h5 class="card-title"><?php echo $d['title_article']; ?></h5>
-                                    <small>Penerbit : <span class="badge bg-success"><?php echo $d['username']; ?></span></small>
+                                    <a class="card-title" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
+                                    <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
                                     <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
                                 </div>
                             </div>
@@ -151,6 +170,66 @@
         </section>
     </div>
     <!-- Content End -->
+
+    <!-- Footer start -->
+    <footer class="footers">
+        <div class="footers-left">
+            <h3>Payment Method</h3>
+            <div class="credit-cards">
+                <img src="img/payment/visa.png" alt="" />
+                <img src="img/payment/mastercard.png" alt="" />
+                <img src="img/payment/paypal.png" alt="" />
+            </div>
+            <p class="footers-copyright">© KaijuStore 2023</p>
+        </div>
+
+        <div class="footers-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Indonesia</span> Jawa Barat, Bandung</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+62 851-5521-0351</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p>
+                    <a href="kaijustoreonline@gmail.com">kaijustoreonline@gmail.com</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="footers-right">
+            <p class="footers-about">
+                <span>About</span>
+                Kaiju is a Japanese media genre involving giant monsters. The word
+                kaiju can also refer to the giant monsters themselves, which are
+                usually depicted attacking major cities and battling either the
+                military or other monsters. The kaiju genre is a subgenre of tokusatsu
+                entertainment.
+            </p>
+
+            <div class="footers-media">
+                <a href="https://www.youtube.com/channel/UCMYBh8nHoeUW0C2jcgUcLLw"
+                    ><i class="fa fa-youtube"></i
+                ></a>
+                <a href="https://www.facebook.com/mohamad.rafli.562"
+                    ><i class="fa fa-facebook"></i
+                ></a>
+                <a href="https://twitter.com/rafliadiprtm"
+                    ><i class="fa fa-twitter"></i
+                ></a>
+                <a href="https://instagram.com/kaiju_store"
+                    ><i class="fa fa-instagram"></i
+                ></a>
+                <a href="https://linktr.ee/kaiju_store"
+                    ><i class="fa fa-linkedin"></i
+                ></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
     
     <!-- My Feather Icons JS -->
     <script>
