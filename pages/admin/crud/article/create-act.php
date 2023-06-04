@@ -17,6 +17,7 @@
                     title_article = '$_POST[title_article]',
                     slug_article = '$_POST[slug_article]',
                     desc_article = '$_POST[desc_article]',
+                    id_user = '$_POST[id_user]',
                     id_category = '$_POST[id_category]'
                 ");
             }

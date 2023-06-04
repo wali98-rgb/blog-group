@@ -14,7 +14,7 @@
     <!-- My Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <!-- My Font -->
+    <!-- My Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,100;1,200;1,300;1,400;1,600;1,800&display=swap" rel="stylesheet">
@@ -22,6 +22,24 @@
     <title>Register Page | I-News</title>
 </head>
 <body>
+    <!-- Check Login Start -->
+    <?php
+        session_start();
+        
+        if (isset($_SESSION['status'])) {
+            if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                header('location:../../pages/admin/index.php');
+            } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                header('location:../../pages/user/index.php');
+            } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                header('location:../../pages/journal/article.php');
+            } else if ($_SESSION['status'] == "logout") {
+                header('location:regis.php');
+            }
+        }
+    ?>
+    <!-- Check Login End -->
+    
     <!-- Navbar Start -->
     <!-- Navbar End -->
 

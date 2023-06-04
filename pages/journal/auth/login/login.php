@@ -31,11 +31,11 @@
         
         if (isset($_SESSION['status'])) {
             if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
-                header('location:../../pages/admin/index.php');
+                header('location:../../../admin/index.php');
             } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
-                header('location:../../pages/user/index.php');
+                header('location:../../../user/index.php');
             } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
-                header('location:../../pages/user/index.php');
+                header('location:../../../user/index.php');
             } else if ($_SESSION['status'] == "logout") {
                 header('location:login.php');
             }
@@ -44,21 +44,48 @@
     <!-- Check Login End -->
     
     <!-- Login Form Start -->
-    <main>
-        <h1>Login Page</h1>
-        <form action="login-check.php" method="POST">
-            <div>
-                <input type="text" name="username" id="username" placeholder="Username" autofocus required>
+    <div class="d-flex col-md-12 text-center justify-content-center mx-auto" style="margin-top: 10rem;">
+        <div class="login-box">
+            <div class="login-logo">
+                <h1>Login Page</h1>
             </div>
 
-            <div>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-            </div>
+            <!-- Card Session Start -->
+            <div class="card mt-4">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Login to start your session</p>
 
-            <input type="submit" name="login" id="" value="Login">
-        </form>
-        <small>Not Registered? <a href="../registration/regis.php">Register</a></small>
-    </main>
+                    <!-- Form Login -->
+                    <form action="login-check.php" method="POST">
+                        <!-- Email Input -->
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="text" name="username" id="username" placeholder="Username" autofocus required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i data-feather="mail"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i data-feather="lock"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Login Button -->
+                        <input class="btn btn-primary btn-block text-center col-12" type="submit" name="login" id="" value="Login">
+                    </form>
+                    <small>Not Registered? <a style="text-decoration: none;" href="../register/regis.php">Register</a></small>
+                </div>
+            </div>
+            <!-- Card Session End -->
+        </div>
+    </div>
     <!-- Login Form End -->
 
     <!-- Footer Start -->

@@ -145,10 +145,12 @@
                             $check = mysqli_num_rows($dat);
                             if ($check > 0) {
                                 $data = mysqli_query($con, "select
-                                        articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_category,
-                                        categories.id_category, categories.name_category, categories.slug_category
-                                        from articles, categories
+                                        articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_user, articles.id_category,
+                                        categories.id_category, categories.name_category, categories.slug_category,
+                                        users.id_user, users.username
+                                        from articles, categories, users
                                         where articles.id_category=categories.id_category
+                                        and articles.id_user=users.id_user
                                         order by articles.title_article asc
                                     ");
 
@@ -161,6 +163,7 @@
                                         <div class="card-body">
                                             <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
                                             <h5 class="card-title"><?php echo $d['title_article']; ?></h5>
+                                            <small>Penerbit : <span class="badge bg-success"><?php echo $d['username']; ?></span></small>
                                             <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
                                             <div class="">
                                                 <a href="show.php?slug=<?php echo $d['slug_article']; ?>" class="btn btn-primary">View</a>

@@ -5,5 +5,5 @@
     // Menghapus Session
     session_destroy();
 
-    header('location:login/login.php');
+    header('location:../pages/user/index.php');
 ?>

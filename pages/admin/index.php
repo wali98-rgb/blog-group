@@ -34,6 +34,8 @@
             header('location:../../auth/login/login.php');
         } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
             header('location:../user/index.php');
+        } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+            header('location:../user/index.php');
         }
     }
     ?>

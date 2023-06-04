@@ -200,6 +200,46 @@
                                         Please choose a category
                                     </div>
                                 </div>
+                                
+                                <div class="form-group mb-4 input-group align-self-center">
+                                    <label for="id_user"><h5>Publisher</h5></label>
+
+                                    <!-- Check Category List Start -->
+                                    <?php
+                                        include "../../../../connection/connection.php";
+
+                                        $user = mysqli_query($con, "select * from users where level='Journalist'");
+                                    ?>
+                                    <!-- Check Category List End -->
+                                    
+                                    <select style="width: 100%; height: 40px;" class="custom-select rounded" name="id_user" id="id_user">
+                                        <option disabled>-- Select Publisher --</option>
+                                        
+                                    <?php
+                                        // while ($cat = mysqli_fetch_array($category)) {
+                                        foreach ($user as $us) {
+                                            if ($us['id_user'] === $art['id_article']) {
+                                    ?>
+
+                                        <option selected value="<?php echo $us['id_user']; ?>"><?php echo $us['username']; ?></option>
+
+                                    <?php while ($u = mysqli_fetch_array($user)) { ?>
+
+                                        <option value="<?php echo $u['id_user'] ?>"><?php echo $u['username']; ?></option>
+
+                                    <?php }} else { ?>
+                                        <!-- <option selected disabled>-- Select Publisher --</option> -->
+                                        <option value="<?php echo $us['id_user']; ?>"><?php echo $us['username']; ?></option>
+
+                                    <?php }} ?>
+                                    </select>
+                                    <div class="valid-feedback">
+                                        The publisher was choosed
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a publisher
+                                    </div>
+                                </div>
 
                                 <input type="submit" class="btn btn-success" name="update" id="" value="Update">
 

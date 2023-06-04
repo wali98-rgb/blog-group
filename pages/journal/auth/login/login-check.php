@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../../connection/connection.php";
+    include "../../../../connection/connection.php";
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -17,19 +17,16 @@
             $_SESSION['level'] = 'Admin';
             $_SESSION['status'] = 'login';
 
-            header('location:../../pages/admin/index.php');
+            header('location:../../../admin/index.php');
         } else if ($d['level'] == 'User') {
-            $_SESSION['username'] = $username;
-            $_SESSION['level'] = 'User';
-            $_SESSION['status'] = 'login';
 
-            header('location:../../pages/user/index.php');
+            header('location:../../../../auth/login/login.php');
         } else if ($d['level'] == 'Journalist') {
             $_SESSION['username'] = $username;
             $_SESSION['level'] = 'Journalist';
             $_SESSION['status'] = 'login';
 
-            header('location:../../pages/user/index.php');
+            header('location:../../../user/index.php');
         }
     } else {
         header('location:login.php?pesan=gagal');

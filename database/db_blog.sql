@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2023 pada 18.17
+-- Waktu pembuatan: 04 Jun 2023 pada 14.56
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -33,6 +33,7 @@ CREATE TABLE `articles` (
   `title_article` varchar(40) NOT NULL,
   `slug_article` varchar(40) NOT NULL,
   `desc_article` longtext NOT NULL,
+  `id_user` int(3) NOT NULL,
   `id_category` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,9 +41,10 @@ CREATE TABLE `articles` (
 -- Dumping data untuk tabel `articles`
 --
 
-INSERT INTO `articles` (`id_article`, `cover_article`, `title_article`, `slug_article`, `desc_article`, `id_category`) VALUES
-(1, 'Avengers_Age_of_Ultron_poster.jpg', 'Hahakaka', 'hahakaka', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aspernatur, voluptatem rerum sit tempore sunt aliquam praesentium officiis recusandae quas alias consectetur voluptate expedita in ipsum quia! Cumque, libero voluptas.', 1),
-(2, 'asus.jpeg', 'Jma', 'jma', 'mkjenvak', 2);
+INSERT INTO `articles` (`id_article`, `cover_article`, `title_article`, `slug_article`, `desc_article`, `id_user`, `id_category`) VALUES
+(1, 'Avengers_Age_of_Ultron_poster.jpg', 'Hahakaka', 'hahakaka', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aspernatur, voluptatem rerum sit tempore sunt aliquam praesentium officiis recusandae quas alias consectetur voluptate expedita in ipsum quia! Cumque, libero voluptas.', 1, 1),
+(2, 'asus.jpeg', 'Jma', 'jma', 'mkjenvak', 7, 2),
+(6, 'Avengers_Infinity_War.jpg', 'kai', 'kai', 'kaikaikia', 7, 2);
 
 -- --------------------------------------------------------
 
@@ -123,7 +125,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `username`, `password`, `email`, `level`) VALUES
 (1, 'wali', '12344321', 'wali@gmail', 'Admin'),
 (2, 'brian', '123321', '123321', 'User'),
-(4, 'dapit', '123', 'dapits@gmail.com', 'User');
+(4, 'dapit', '123', 'dapits@gmail.com', 'User'),
+(7, 'dapit', '1221', '1221', 'Journalist');
 
 --
 -- Indexes for dumped tables
@@ -167,7 +170,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `categories`
@@ -191,7 +194,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
