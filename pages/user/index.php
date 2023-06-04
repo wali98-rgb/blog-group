@@ -48,15 +48,15 @@
 
         <div class="navbar-nav">
             <a href="index.html" class="now">Home</a>
-            <a href="display/kategori/nasional.html">Nasional</a>
-            <a href="display/kategori/internasional.html">Internasional</a>
-            <a href="display/kategori/politik.html">Politik</a>
-            <a href="display/kategori/ekonomi.html">Ekonomi</a>
-            <a href="display/kategori/olahraga.html">Olahraga</a>
-            <a href="display/kategori/teknologi.html">Teknologi</a>
-            <a href="display/kategori/otomotif.html">Otomotif</a>
-            <a href="display/kategori/hiburan.html">Hiburan</a>
-            <a href="display/kategori/gayahidup.html">Gaya Hidup</a>
+            <a href="display/kategori/nasional.html">National</a>
+            <a href="display/kategori/internasional.html">International</a>
+            <a href="display/kategori/politik.html">Politic</a>
+            <a href="display/kategori/ekonomi.html">Finance</a>
+            <a href="display/kategori/olahraga.html">Sports</a>
+            <a href="display/kategori/teknologi.html">Technology</a>
+            <a href="display/kategori/otomotif.html">Automotive</a>
+            <a href="display/kategori/hiburan.html">Entertaiment</a>
+            <a href="display/kategori/gayahidup.html">LifeStyle</a>
             <?php
                 session_start();
                 if (isset($_SESSION['status'])) {
