@@ -36,90 +36,74 @@
     <!-- Check Login End -->
 
     <!-- Navbar Start -->
-    <nav>
-        <!-- Navbar Logo Start -->
-        <nav>
-            <nav class="navbar bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                        Independent <span>News</span>
-                    </a>
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <?php echo $_SESSION['username']; ?>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/article/article.php">Article</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/category/category.php">Categoty</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/user/user.php">User</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/review/review.php">Review</a>
-                            </li>
-                        </ul>
-                    </div>
-            </nav>
-            <!-- Navbar Logo End -->
-
-            <!-- Navbar Nav Start -->
+    <nav class="navbar" style="background-color: aqua; border-bottom: 1px solid silver">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Independent <span>News</span>
+            </a>
+            <a class="navbar-brand" href="category.php">Categories</a>
             <div>
-                <span>Dashboard</span>
-                <a href="#">Search</a>
-                <a href="../../../../auth/logout.php">Logout</a>
+                <a class="text-dark mr-2" href="#"><i data-feather="search"></i></a>
+                <a class="btn btn-danger ml-2" href="../../../../auth/logout.php"><i data-feather="log-out"></i> Logout</a>
             </div>
-            <!-- Navbar Nav End -->
-        </nav>
-        <!-- Navbar End -->
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/article/article.php">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/user/user.php">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/review/review.php">Review</a>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+    </nav>
+    <!-- Navbar End -->
 
+    <div class="row p-3">
         <!-- Sidebar Start -->
-        <section>
+        <section class="col-3">
             <div>
                 <!-- Username Admin Start -->
-                <ul>
-                    <li><?php echo $_SESSION['username']; ?></li>
-                </ul>
+                <h3 class="text-dark" style="display: flex; align-items: center;"><i data-feather="user"></i> &nbsp;<label for=""><?php echo $_SESSION['username']; ?></label></h3>
                 <!-- Username Admin End -->
 
                 <!-- Button Action Start -->
-                <ul>
-                    <li><a href="../../index.php">Dashboard</a></li>
-                    <li><a href="../article/article.php">Articles</a></li>
-                    <li><a href="category.php">Category</a></li>
-                    <li><a href="../user/user.php">User</a></li>
-                    <li><a href="../review/review.php">Review</a></li>
-
-                    <!-- Partition Start -->
+                <div class="">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="../../index.php" role="tab" aria-controls="home">Home</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="../article/article.php" role="tab" aria-controls="profile">Article</a>
+                        <a class="list-group-item list-group-item-action active" id="list-messages-list" data-toggle="list" href="category.php" role="tab" aria-controls="messages">Category</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../user/user.php" role="tab" aria-controls="settings">User</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../review/review.php" role="tab" aria-controls="settings">Review</a>
+                    </div>
                     <hr size="2px" color="black">
-                    <!-- Partition End -->
-
-                    <!-- User Page Start -->
-                    <span>User Page</span> <br>
-                    <a href="../../../user/index.php">View User Page</a>
-                    <!-- User Page End -->
-                </ul>
+                    <h3 class="text-primary">User Page</h3>
+                    <a class="btn btn-primary" href="../../../user/index.php">View User Page</a>
+                </div>
                 <!-- Button Action End -->
             </div>
         </section>
         <!-- Sidebar End -->
 
         <!-- Content Start -->
-        <div class="content-wrapper">
+        <div class="content-wrapper col-9">
             <section class="content">
                 <!-- Card Content Start -->
                 <div class="container-fluid">
@@ -181,18 +165,19 @@
             </section>
         </div>
         <!-- Content End -->
+    </div>
 
-        <!-- Footer Start -->
-        <!-- Footer End -->
+    <!-- Footer Start -->
+    <!-- Footer End -->
 
-        <!-- My Feather Icons JS -->
-        <script>
-            feather.replace()
-        </script>
+    <!-- My Feather Icons JS -->
+    <script>
+        feather.replace()
+    </script>
 
-        <!-- My Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <!-- My Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 </body>
 
 </html>

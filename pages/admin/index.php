@@ -42,122 +42,112 @@
     <!-- Check Login End -->
 
     <!-- Navbar Start -->
-    <nav>
-        <nav class="navbar bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                    Independent <span>News</span>
-                </a>
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <?php echo $_SESSION['username']; ?>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crud/article/article.php">Article</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crud/category/category.php">Categoty</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crud/user/user.php">User</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="crud/review/review.php">Review</a>
-                        </li>
-                    </ul>
-                </div>
-        </nav>
-        <!-- Navbar Logo Start -->
-
-        <!-- Navbar Logo End -->
-
-        <!-- Navbar Nav Start -->
-        <div>
-            <span>Dashboard</span>
-            <a href="#">Search</a>
-            <a href="../../auth/logout.php">Logout</a>
+    <nav class="navbar" style="background-color: aqua; border-bottom: 1px solid silver">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Independent <span>News</span>
+            </a>
+            <a class="navbar-brand" href="index.php">Dashboard</a>
+            <div>
+                <a class="text-dark mr-2" href="#"><i data-feather="search"></i></a>
+                <a class="btn btn-danger ml-2" href="../../auth/logout.php"><i data-feather="log-out"></i> Logout</a>
+            </div>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/article/article.php">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/user/user.php">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/review/review.php">Review</a>
+                    </li>
+                </ul>
+            </div> -->
         </div>
-        <!-- Navbar Nav End -->
     </nav>
     <!-- Navbar End -->
 
-    <!-- Sidebar Start -->
-    <section>
-        <div>
-            <!-- Username Admin Start -->
-            <ul>
-                <li><?php echo $_SESSION['username']; ?></li>
-            </ul>
-            <!-- Username Admin End -->
-
-            <!-- Button Action Start -->
-            <ul>
-                <li><a href="index.php">Dashboard</a></li>
-                <li><a href="crud/article/article.php">Articles</a></li>
-                <li><a href="crud/category/category.php">Category</a></li>
-                <li><a href="crud/user/user.php">User</a></li>
-                <li><a href="crud/review/review.php">Review</a></li>
-
-                <!-- Partition Start -->
-                <hr size="2px" color="black">
-                <!-- Partition End -->
-
-                <!-- User Page Start -->
-                <span>User Page</span> <br>
-                <a href="../user/index.php">View User Page</a>
-                <!-- User Page End -->
-            </ul>
-            <!-- Button Action End -->
-        </div>
-    </section>
-    <!-- Sidebar End -->
-
-    <!-- Hero Start -->
-    <section>
-        <main>
-            <h1>Dashboard <span>Page</span></h1>
-            <!-- Card Category Start -->
-            <div class="card-box">
-                <h1>Category List</h1>
-                <?php
-                include "../../connection/connection.php";
-
-                $data = mysqli_query($con, "SELECT * FROM categories");
-
-                while ($d = mysqli_fetch_array($data)) {
-                ?>
-                    <div>
-                        <a href="crud/category/category.php#<?php echo $d['slug_category']; ?>">
-                            <?php echo $d['name_category']; ?>
-                        </a>
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
-            <!-- Card Category End -->
-
-            <!-- Report Start -->
+    <div class="row p-3">
+        <!-- Sidebar Start -->
+        <section class="col-3">
             <div>
-                <iframe src="" frameborder="0"></iframe>
-                <span>Report Review</span>
+                <!-- Username Admin Start -->
+                <h3 class="text-dark" style="display: flex; align-items: center;"><i data-feather="user"></i> &nbsp;<label for=""><?php echo $_SESSION['username']; ?></label></h3>
+                <!-- Username Admin End -->
+
+                <!-- Button Action Start -->
+                <div class="">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="index.php" role="tab" aria-controls="home">Home</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="crud/article/article.php" role="tab" aria-controls="profile">Article</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="crud/category/category.php" role="tab" aria-controls="messages">Category</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="crud/user/user.php" role="tab" aria-controls="settings">User</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="crud/review/review.php" role="tab" aria-controls="settings">Review</a>
+                    </div>
+                    <hr size="2px" color="black">
+                    <h3 class="text-primary">User Page</h3>
+                    <a class="btn btn-primary" href="../user/index.php">View User Page</a>
+                </div>
+                <!-- Button Action End -->
             </div>
-            <!-- Report End -->
-        </main>
-    </section>
-    <!-- Hero End -->
+        </section>
+        <!-- Sidebar End -->
+
+        <!-- Hero Start -->
+        <section class="col-9">
+            <main>
+                <h1>Dashboard <span>Page</span></h1>
+                <hr size="2px solid gray">
+                <!-- Card Category Start -->
+                <div class="card-box mb-3">
+                    <h1>Category List</h1>
+                    <?php
+                    include "../../connection/connection.php";
+
+                    $data = mysqli_query($con, "SELECT * FROM categories");
+
+                    while ($d = mysqli_fetch_array($data)) {
+                    ?>
+                    <a class="btn btn-secondary m-2 mx-auto" href="crud/category/category.php#<?php echo $d['slug_category']; ?>">
+                        <?php echo $d['name_category']; ?>
+                    </a>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <!-- Card Category End -->
+
+                <!-- Report Start -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex  justify-content-center">
+                            <iframe src="crud/review/report.php" frameborder="0" width="80%" height="400px"></iframe>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <a class="btn btn-warning" style="font-weight: 600;" href="crud/review/report.php">Report Review</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Report End -->
+            </main>
+        </section>
+        <!-- Hero End -->
+    </div>
 
     <!-- Content Start -->
     <!-- Content End -->

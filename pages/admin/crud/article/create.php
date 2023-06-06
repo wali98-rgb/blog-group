@@ -38,176 +38,197 @@
     <!-- Check Login End -->
 
     <!-- Navbar Start -->
-    <nav>
-        <!-- Navbar Logo Start -->
-        <h1>Independent<span>News</span>.</h1>
-        <!-- Navbar Logo End -->
-
-        <!-- Navbar Nav Start -->
-        <div>
-            <span>Dashboard</span>
-            <a href="#">Search</a>
-            <a href="../../../../auth/logout.php">Logout</a>
+    <nav class="navbar" style="background-color: aqua; border-bottom: 1px solid silver">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Independent <span>News</span>
+            </a>
+            <a class="navbar-brand" href="article.php">Articles</a>
+            <div>
+                <a class="text-dark mr-2" href="#"><i data-feather="search"></i></a>
+                <a class="btn btn-danger ml-2" href="../../../../auth/logout.php"><i data-feather="log-out"></i> Logout</a>
+            </div>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/article/article.php">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/user/user.php">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/review/review.php">Review</a>
+                    </li>
+                </ul>
+            </div> -->
         </div>
-        <!-- Navbar Nav End -->
     </nav>
     <!-- Navbar End -->
 
-    <!-- Sidebar Start -->
-    <section>
-        <div>
-            <!-- Username Admin Start -->
-            <ul>
-                <li><?php echo $_SESSION['username']; ?></li>
-            </ul>
-            <!-- Username Admin End -->
+    <div class="row p-3">
+        <!-- Sidebar Start -->
+        <section class="col-3">
+            <div>
+                <!-- Username Admin Start -->
+                <h3 class="text-dark" style="display: flex; align-items: center;"><i data-feather="user"></i> &nbsp;<label for=""><?php echo $_SESSION['username']; ?></label></h3>
+                <!-- Username Admin End -->
 
-            <!-- Button Action Start -->
-            <ul>
-                <li><a href="../../index.php">Dashboard</a></li>
-                <li><a href="article.php">Articles</a></li>
-                <li><a href="../category/category.php">Category</a></li>
-                <li><a href="../user/user.php">User</a></li>
-                <li><a href="../review/review.php">Review</a></li>
-
-                <!-- Partition Start -->
-                <hr size="2px" color="black">
-                <!-- Partition End -->
-
-                <!-- User Page Start -->
-                <span>User Page</span> <br>
-                <a href="../../../user/index.php">View User Page</a>
-                <!-- User Page End -->
-            </ul>
-            <!-- Button Action End -->
-        </div>
-    </section>
-    <!-- Sidebar End -->
-
-    <!-- Content Start -->
-    <div class="content-wrapper">
-        <section class="content">
-            <div class="container-fluid">
-                <h1>Create Article Page</h1>
-                <a href="article.php" class="btn btn-danger mb-2">Back</a>
-                <!-- Form Article Start -->
-                <div class="col-12">
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Article</h3>
-                        </div>
-    
-                        <!-- Form Article Session Start -->
-                        <div class="card-body">
-                            <form action="create-act.php" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
-                                <div class="form-group mb-4">
-                                    <label for="cover_article"><h5>Cover Input</h5></label>
-                                    <input type="file" name="cover_article" class="form-control" id="cover_article">
-                                    <div class="valid-feedback">
-                                        The cover was choosed
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <label for="title_article"><h5>Title Article</h5></label>
-                                    <input type="text" name="title_article" class="form-control" id="title_article" placeholder="Input Title for Article..." autofocus required>
-                                    <div class="valid-feedback">
-                                        The title was choosed
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please choose a title
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <label for="slug_article"><h5>Slug Article</h5></label>
-                                    <input type="text" name="slug_article" class="form-control" id="slug_article" placeholder="Input Slug..." required>
-                                    <div class="valid-feedback">
-                                        The slug was choosed
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please choose a slug
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <label for="desc_article"><h5>Description Article</h5></label>
-                                    <textarea class="form-control" name="desc_article" id="desc_article" rows="5" placeholder="Input Description for Article..." required></textarea>
-                                    <div class="valid-feedback">
-                                        The description was choosed
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please provide a description
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group mb-4 input-group align-self-center">
-                                    <label for="id_category"><h5>Category</h5></label>
-
-                                    <!-- Check Category List Start -->
-                                    <?php
-                                        include "../../../../connection/connection.php";
-
-                                        $category = mysqli_query($con, "select * from categories");
-                                    ?>
-                                    <!-- Check Category List End -->
-                                    
-                                    <select style="width: 100%; height: 40px;" class="custom-select rounded" name="id_category" id="id_category">
-                                        <option selected disabled>-- Select Category --</option>
-
-                                        <?php while ($cat = mysqli_fetch_array($category)) { ?>
-
-                                        <option value="<?php echo $cat['id_category']; ?>"><?php echo $cat['name_category']; ?></option>
-
-                                        <?php } ?>
-                                    </select>
-                                    <div class="valid-feedback">
-                                        The category was choosed
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please choose a category
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group mb-4 input-group align-self-center">
-                                    <label for="id_user"><h5>Publisher</h5></label>
-
-                                    <!-- Check Category List Start -->
-                                    <?php
-                                        include "../../../../connection/connection.php";
-
-                                        $user = mysqli_query($con, "select * from users where level='Journalist'");
-                                    ?>
-                                    <!-- Check Category List End -->
-                                    
-                                    <select style="width: 100%; height: 40px;" class="custom-select rounded" name="id_user" id="id_user">
-                                        <option selected disabled>-- Select Publisher --</option>
-
-                                        <?php while ($us = mysqli_fetch_array($user)) { ?>
-
-                                        <option value="<?php echo $us['username']; ?>"><?php echo $us['username']; ?></option>
-
-                                        <?php } ?>
-                                    </select>
-                                    <div class="valid-feedback">
-                                        The publisher was choosed
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please choose a publisher
-                                    </div>
-                                </div>
-
-                                <input type="submit" class="btn btn-success" name="save" id="" value="Add">
-                            </form>
-                        </div>
-                        <!-- Form Article Session End -->
+                <!-- Button Action Start -->
+                <div class="">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="../../index.php" role="tab" aria-controls="home">Home</a>
+                        <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="article.php" role="tab" aria-controls="profile">Article</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="../category/category.php" role="tab" aria-controls="messages">Category</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../user/user.php" role="tab" aria-controls="settings">User</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../review/review.php" role="tab" aria-controls="settings">Review</a>
                     </div>
+                    <hr size="2px" color="black">
+                    <h3 class="text-primary">User Page</h3>
+                    <a class="btn btn-primary" href="../../../user/index.php">View User Page</a>
                 </div>
-                <!-- Form Article End -->
+                <!-- Button Action End -->
             </div>
         </section>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content-wrapper col-9">
+            <section class="content">
+                <div class="container-fluid">
+                    <h1>Create Article Page</h1>
+                    <a href="article.php" class="btn btn-danger mb-2">Back</a>
+                    <!-- Form Article Start -->
+                    <div class="col-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Create Article</h3>
+                            </div>
+        
+                            <!-- Form Article Session Start -->
+                            <div class="card-body">
+                                <form action="create-act.php" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+                                    <div class="form-group mb-4">
+                                        <label for="cover_article"><h5>Cover Input</h5></label>
+                                        <input type="file" name="cover_article" class="form-control" id="cover_article">
+                                        <div class="valid-feedback">
+                                            The cover was choosed
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="title_article"><h5>Title Article</h5></label>
+                                        <input type="text" name="title_article" class="form-control" id="title_article" placeholder="Input Title for Article..." autofocus required>
+                                        <div class="valid-feedback">
+                                            The title was choosed
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose a title
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="slug_article"><h5>Slug Article</h5></label>
+                                        <input type="text" name="slug_article" class="form-control" id="slug_article" placeholder="Input Slug..." required>
+                                        <div class="valid-feedback">
+                                            The slug was choosed
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose a slug
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label for="desc_article"><h5>Description Article</h5></label>
+                                        <textarea class="form-control" name="desc_article" id="desc_article" rows="5" placeholder="Input Description for Article..." required></textarea>
+                                        <div class="valid-feedback">
+                                            The description was choosed
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please provide a description
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-4 input-group align-self-center">
+                                        <label for="id_category"><h5>Category</h5></label>
+
+                                        <!-- Check Category List Start -->
+                                        <?php
+                                            include "../../../../connection/connection.php";
+
+                                            $category = mysqli_query($con, "select * from categories");
+                                        ?>
+                                        <!-- Check Category List End -->
+                                        
+                                        <select style="width: 100%; height: 40px;" class="custom-select rounded" name="id_category" id="id_category">
+                                            <option selected disabled>-- Select Category --</option>
+
+                                            <?php while ($cat = mysqli_fetch_array($category)) { ?>
+
+                                            <option value="<?php echo $cat['id_category']; ?>"><?php echo $cat['name_category']; ?></option>
+
+                                            <?php } ?>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            The category was choosed
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose a category
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-4 input-group align-self-center">
+                                        <label for="id_user"><h5>Publisher</h5></label>
+
+                                        <!-- Check Category List Start -->
+                                        <?php
+                                            include "../../../../connection/connection.php";
+
+                                            $user = mysqli_query($con, "select * from users where level='Journalist'");
+                                        ?>
+                                        <!-- Check Category List End -->
+                                        
+                                        <select style="width: 100%; height: 40px;" class="custom-select rounded" name="id_user" id="id_user">
+                                            <option selected disabled>-- Select Publisher --</option>
+
+                                            <?php while ($us = mysqli_fetch_array($user)) { ?>
+
+                                            <option value="<?php echo $us['username']; ?>"><?php echo $us['username']; ?></option>
+
+                                            <?php } ?>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            The publisher was choosed
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose a publisher
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" class="btn btn-success" name="save" id="" value="Add">
+                                </form>
+                            </div>
+                            <!-- Form Article Session End -->
+                        </div>
+                    </div>
+                    <!-- Form Article End -->
+                </div>
+            </section>
+        </div>
+        <!-- Content End -->
     </div>
-    <!-- Content End -->
 
     <!-- Footer Start -->
     <!-- Footer End -->

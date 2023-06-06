@@ -36,159 +36,146 @@
     <!-- Check Login End -->
     <!-- Navbar Start -->
     <nav>
-        <!-- Navbar Logo Start -->
-        <nav>
-            <nav class="navbar bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                        Independent <span>News</span>
-                    </a>
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <?php echo $_SESSION['username']; ?>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/article/article.php">Article</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/category/category.php">Categoty</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/user/user.php">User</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="crud/review/review.php">Review</a>
-                            </li>
-                        </ul>
-                    </div>
-            </nav>
-            <!-- Navbar Logo End -->
-
-            <!-- Navbar Nav Start -->
-            <div>
-                <span>Review</span>
-                <a href="#">Search</a>
-                <a href="../../../../auth/logout.php">Logout</a>
-            </div>
-            <!-- Navbar Nav End -->
-        </nav>
-        <!-- Navbar End -->
-
-        <!-- Sidebar Start -->
-        <section>
-            <div>
-                <!-- Username Admin Start -->
-                <ul>
-                    <li><?php echo $_SESSION['username']; ?></li>
-                </ul>
-                <!-- Username Admin End -->
-
-                <!-- Button Action Start -->
-                <ul>
-                    <li><a href="../../index.php">Dashboard</a></li>
-                    <li><a href="../article/article.php">Articles</a></li>
-                    <li><a href="../category/category.php">Category</a></li>
-                    <li><a href="../user/user.php">User</a></li>
-                    <li><a href="review.php">Review</a></li>
-
-                    <!-- Partition Start -->
-                    <hr size="2px" color="black">
-                    <!-- Partition End -->
-
-                    <!-- User Page Start -->
-                    <span>User Page</span> <br>
-                    <a href="../../../user/index.php">View User Page</a>
-                    <!-- User Page End -->
-                </ul>
-                <!-- Button Action End -->
-            </div>
-        </section>
-        <!-- Sidebar End -->
-
-        <!-- Content Start -->
-        <div class="content-wrapper">
-            <section class="content">
-                <!-- Card Content Start -->
-                <div class="container-fluid">
-                    <h1>Review Page</h1>
-                    <!-- Show Review Start -->
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Review List</h3>
-                        </div>
-
-                        <!-- Table Session Start -->
-                        <div class="card-body">
-                            <!-- Check Item Database Start -->
-                            <?php
-                                include "../../../../connection/connection.php";
-
-                                $no = 1;
-                                $data = mysqli_query($con, "select
-                                    articles.id_article, articles.title_article, articles.review_article, articles.id_category,
-                                    categories.id_category, categories.name_category
-                                    from articles, categories
-                                    where articles.id_category=categories.id_category
-                                    order by articles.title_article asc
-                                ");
-                            ?>
-                            <!-- Check Item Database End -->
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr align="center">
-                                        <th style="width: 40px;">#</th>
-                                        <th>Title Article</th>
-                                        <th>Category Article</th>
-                                        <th style="width: 150px;">Total Review</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Looping Data Start -->
-                                    <?php
-                                        while ($d = mysqli_fetch_array($data)) {
-                                            $id_art = $d['id_article'];
-                                    ?>
-                                    <!-- Looping Data End -->
-                                    <tr align="center">
-                                        <td><?php echo $no++; ?></td>
-                                        <td><?php echo $d['title_article']; ?></td>
-                                        <td><?php echo $d['name_category']; ?></td>
-                                        <td>
-                                            <span class="badge bg-danger"><?php echo $d['review_article']; ?></span>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr align="center">
-                                        <th style="width: 40px;">#</th>
-                                        <th>Title Article</th>
-                                        <th>Category Article</th>
-                                        <th style="width: 150px;">Total Review</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- Table Session End -->
-                    </div>
-                    <!-- Show Review End -->
+        <nav class="navbar" style="background-color: aqua; border-bottom: 1px solid silver">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Independent <span>News</span>
+                </a>
+                <a class="navbar-brand" href="review.php">Reviews</a>
+                <div>
+                    <a class="text-dark mr-2" href="#"><i data-feather="search"></i></a>
+                    <a class="btn btn-danger ml-2" href="../../../../auth/logout.php"><i data-feather="log-out"></i> Logout</a>
                 </div>
-                <!-- Card Content End -->
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/article/article.php">Article</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/user/user.php">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="crud/review/review.php">Review</a>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+        </nav>
+    </nav>
+    <!-- Navbar End -->
+
+        <div class="row p-3">
+            <!-- Sidebar Start -->
+            <section class="col-3">
+                <div>
+                    <!-- Username Admin Start -->
+                    <h3 class="text-dark" style="display: flex; align-items: center;"><i data-feather="user"></i> &nbsp;<label for=""><?php echo $_SESSION['username']; ?></label></h3>
+                    <!-- Username Admin End -->
+
+                    <!-- Button Action Start -->
+                    <div class="">
+                        <div class="list-group" id="list-tab" role="tablist">
+                            <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="../../index.php" role="tab" aria-controls="home">Home</a>
+                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="../article/article.php" role="tab" aria-controls="profile">Article</a>
+                            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="../category/category.php" role="tab" aria-controls="messages">Category</a>
+                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../user/user.php" role="tab" aria-controls="settings">User</a>
+                            <a class="list-group-item list-group-item-action active" id="list-settings-list" data-toggle="list" href="review.php" role="tab" aria-controls="settings">Review</a>
+                        </div>
+                        <hr size="2px" color="black">
+                        <h3 class="text-primary">User Page</h3>
+                        <a class="btn btn-primary" href="../../../user/index.php">View User Page</a>
+                    </div>
+                    <!-- Button Action End -->
+                </div>
             </section>
+            <!-- Sidebar End -->
+
+            <!-- Content Start -->
+            <div class="content-wrapper col-9">
+                <section class="content">
+                    <!-- Card Content Start -->
+                    <div class="container-fluid">
+                        <h1>Review Page</h1>
+                        <!-- Show Review Start -->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Review List</h3>
+                            </div>
+
+                            <!-- Table Session Start -->
+                            <div class="card-body">
+                                <!-- Check Item Database Start -->
+                                <?php
+                                    include "../../../../connection/connection.php";
+
+                                    $no = 1;
+                                    $data = mysqli_query($con, "select
+                                        articles.id_article, articles.title_article, articles.review_article, articles.id_category,
+                                        categories.id_category, categories.name_category
+                                        from articles, categories
+                                        where articles.id_category=categories.id_category
+                                        order by articles.title_article asc
+                                    ");
+                                ?>
+                                <!-- Check Item Database End -->
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr align="center">
+                                            <th style="width: 40px;">#</th>
+                                            <th>Title Article</th>
+                                            <th>Category Article</th>
+                                            <th style="width: 150px;">Total Review</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Looping Data Start -->
+                                        <?php
+                                            while ($d = mysqli_fetch_array($data)) {
+                                                $id_art = $d['id_article'];
+                                        ?>
+                                        <!-- Looping Data End -->
+                                        <tr align="center">
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $d['title_article']; ?></td>
+                                            <td><?php echo $d['name_category']; ?></td>
+                                            <td>
+                                                <span class="badge bg-danger"><?php echo $d['review_article']; ?></span>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr align="center">
+                                            <th style="width: 40px;">#</th>
+                                            <th>Title Article</th>
+                                            <th>Category Article</th>
+                                            <th style="width: 150px;">Total Review</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- Table Session End -->
+                        </div>
+                        <!-- Show Review End -->
+                    </div>
+                    <!-- Card Content End -->
+                </section>
+            </div>
+            <!-- Content End -->
         </div>
-        <!-- Content End -->
 
         <!-- Footer Start -->
         <!-- Footer End -->

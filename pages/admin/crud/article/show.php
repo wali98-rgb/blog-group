@@ -38,120 +38,141 @@
     <!-- Check Login End -->
 
     <!-- Navbar Start -->
-    <nav>
-        <!-- Navbar Logo Start -->
-        <h1>Independent<span>News</span>.</h1>
-        <!-- Navbar Logo End -->
-
-        <!-- Navbar Nav Start -->
-        <div>
-            <span>Dashboard</span>
-            <a href="#">Search</a>
-            <a href="../../../../auth/logout.php">Logout</a>
+    <nav class="navbar" style="background-color: aqua; border-bottom: 1px solid silver">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="..\..\..\..\img\logo\logo_nb.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Independent <span>News</span>
+            </a>
+            <a class="navbar-brand" href="article.php">Articles</a>
+            <div>
+                <a class="text-dark mr-2" href="#"><i data-feather="search"></i></a>
+                <a class="btn btn-danger ml-2" href="../../../../auth/logout.php"><i data-feather="log-out"></i> Logout</a>
+            </div>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/article/article.php">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/category/category.php">Categoty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/user/user.php">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="crud/review/review.php">Review</a>
+                    </li>
+                </ul>
+            </div> -->
         </div>
-        <!-- Navbar Nav End -->
     </nav>
     <!-- Navbar End -->
 
-    <!-- Sidebar Start -->
-    <section>
-        <div>
-            <!-- Username Admin Start -->
-            <ul>
-                <li><?php echo $_SESSION['username']; ?></li>
-            </ul>
-            <!-- Username Admin End -->
+    <div class="row p-3">
+        <!-- Sidebar Start -->
+        <section class="col-3">
+            <div>
+                <!-- Username Admin Start -->
+                <h3 class="text-dark" style="display: flex; align-items: center;"><i data-feather="user"></i> &nbsp;<label for=""><?php echo $_SESSION['username']; ?></label></h3>
+                <!-- Username Admin End -->
 
-            <!-- Button Action Start -->
-            <ul>
-                <li><a href="../../index.php">Dashboard</a></li>
-                <li><a href="article.php">Articles</a></li>
-                <li><a href="../category/category.php">Category</a></li>
-                <li><a href="../user/user.php">User</a></li>
-                <li><a href="../review/review.php">Review</a></li>
-
-                <!-- Partition Start -->
-                <hr size="2px" color="black">
-                <!-- Partition End -->
-
-                <!-- User Page Start -->
-                <span>User Page</span> <br>
-                <a href="../../../user/index.php">View User Page</a>
-                <!-- User Page End -->
-            </ul>
-            <!-- Button Action End -->
-        </div>
-    </section>
-    <!-- Sidebar End -->
-
-    <!-- Content Start -->
-    <div class="content-wrapper">
-        <section class="content">
-            <!-- Card Content Start -->
-            <div class="container-fluid">
-                <h1>Article Page</h1>
-                <a href="article.php" class="btn btn-danger mb-2">Back</a>
-                <!-- Show Article List -->
-                <div class="card card-default color-palette-box">
-                    <div class="card-header">
-                        <h3 class="card-title">Article List</h3>
+                <!-- Button Action Start -->
+                <div class="">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="../../index.php" role="tab" aria-controls="home">Home</a>
+                        <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="article.php" role="tab" aria-controls="profile">Article</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="../category/category.php" role="tab" aria-controls="messages">Category</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../user/user.php" role="tab" aria-controls="settings">User</a>
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="../review/review.php" role="tab" aria-controls="settings">Review</a>
                     </div>
+                    <hr size="2px" color="black">
+                    <h3 class="text-primary">User Page</h3>
+                    <a class="btn btn-primary" href="../../../user/index.php">View User Page</a>
+                </div>
+                <!-- Button Action End -->
+            </div>
+        </section>
+        <!-- Sidebar End -->
 
-                    <!-- Card Session Start -->
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Check Item Database Start -->
-                            <?php
-                                include "../../../../connection/connection.php";
+        <!-- Content Start -->
+        <div class="content-wrapper col-9">
+            <section class="content">
+                <!-- Card Content Start -->
+                <div class="container-fluid">
+                    <h1>Article Page</h1>
+                    <a href="article.php" class="btn btn-danger mb-2">Back</a>
+                    <!-- Show Article List -->
+                    <div class="card card-default color-palette-box">
+                        <div class="card-header">
+                            <h3 class="card-title">Article List</h3>
+                        </div>
 
-                                $slug = $_GET['slug'];
-                                
-                                
-                                $data = mysqli_query($con, "select
-                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_category,
-                                    categories.id_category, categories.name_category, categories.slug_category
-                                    from articles, categories
-                                    where articles.id_category=categories.id_category
-                                    and articles.slug_article = '$slug'
-                                    order by articles.title_article asc
-                                ");
-                                
-                                // while ($d = mysqli_fetch_array($data)) {
-                                foreach ($data as $d) {
-                            ?>
+                        <!-- Card Session Start -->
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Check Item Database Start -->
+                                <?php
+                                    include "../../../../connection/connection.php";
 
-                            <div class="card card-default">
-                                <span hidden><?php echo $d['id_article'] ?></span>
-                                <div class="row">
-                                    <div class="col-3 py-3">
-                                        <img class="card-img-top img-thumbnail rounded" src="<?php echo 'cover_article/' . $d['cover_article']; ?>" alt="Cover Article <?php echo $d['title_article']; ?>">
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?php echo $d['title_article']; ?></h5>
-                                            <hr>
-                                            <div class="d-flex justify-content-end">
-                                                <span>Category : &nbsp;<a style="text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger"><?php echo $d['name_category']; ?></a></span>
+                                    $slug = $_GET['slug'];
+                                    
+                                    
+                                    $data = mysqli_query($con, "select
+                                        articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_category,
+                                        categories.id_category, categories.name_category, categories.slug_category
+                                        from articles, categories
+                                        where articles.id_category=categories.id_category
+                                        and articles.slug_article = '$slug'
+                                        order by articles.title_article asc
+                                    ");
+                                    
+                                    // while ($d = mysqli_fetch_array($data)) {
+                                    foreach ($data as $d) {
+                                ?>
+
+                                <div class="card card-default">
+                                    <span hidden><?php echo $d['id_article'] ?></span>
+                                    <div class="row">
+                                        <div class="col-3 py-3">
+                                            <img class="card-img-top img-thumbnail rounded" src="<?php echo 'cover_article/' . $d['cover_article']; ?>" alt="Cover Article <?php echo $d['title_article']; ?>">
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $d['title_article']; ?></h5>
+                                                <hr>
+                                                <div class="d-flex justify-content-end">
+                                                    <span>Category : &nbsp;<a style="text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger"><?php echo $d['name_category']; ?></a></span>
+                                                </div>
+                                                <p style="text-align: justify;" class="card-text"><?php echo $d['desc_article']; ?></p>
                                             </div>
-                                            <p style="text-align: justify;" class="card-text"><?php echo $d['desc_article']; ?></p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <?php
-                                }
-                            ?>
-                            <!-- Check Item Database End -->
+                                <?php
+                                    }
+                                ?>
+                                <!-- Check Item Database End -->
+                            </div>
                         </div>
+                        <!-- Card Session End -->
                     </div>
-                    <!-- Card Session End -->
                 </div>
-            </div>
-            <!-- Card Content End -->
-        </section>
-    </div>
-    <!-- Content End -->
+                <!-- Card Content End -->
+            </section>
+        </div>
+        <!-- Content End -->
+</body>
     
     <!-- Footer Start -->
     <!-- Footer End -->

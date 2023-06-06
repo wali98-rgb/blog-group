@@ -176,7 +176,7 @@
                                 <hr>
                                 <div class="card-body">
                                     <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
-                                    <a class="card-title text-dark" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
+                                    <a class="card-title text-dark" href="crud/show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
                                     <small class="text-dark" style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
                                     <p style="text-align: justify; max-width: 400px;" class="card-text text-dark"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
                                     <div class="">
