@@ -6,7 +6,7 @@ function displayDate() {
 }
 
 // Toggle class active for hamburger menu
-const navbarNav = document.querySelector(".navbar-nav");
+const navbarNav = document.querySelector(".navbars-nav");
 
 // ketika hamburger di klik
 document.querySelector("#hamburger-menu").onclick = () => {
@@ -14,7 +14,7 @@ document.querySelector("#hamburger-menu").onclick = () => {
 };
 
 // Toggle class active for search form
-const searchForm = document.querySelector(".search-form");
+const searchForm = document.querySelector(".search-forms");
 const searchBox = document.querySelector("#search-box");
 
 document.querySelector("#search-button").onclick = (e) => {

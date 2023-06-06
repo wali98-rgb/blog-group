@@ -137,12 +137,10 @@
 
                                 $no = 1;
                                 $data = mysqli_query($con, "select
-                                    articles.id_article, articles.title_article, articles.id_category,
-                                    categories.id_category, categories.name_category,
-                                    reviews.id_review, reviews.interest_review, reviews.id_article
-                                    from articles, categories, reviews
+                                    articles.id_article, articles.title_article, articles.review_article, articles.id_category,
+                                    categories.id_category, categories.name_category
+                                    from articles, categories
                                     where articles.id_category=categories.id_category
-                                    and articles.id_article=reviews.id_article
                                     order by articles.title_article asc
                                 ");
                             ?>
@@ -167,15 +165,8 @@
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $d['title_article']; ?></td>
                                         <td><?php echo $d['name_category']; ?></td>
-
-                                        <?php
-                                            // $r = mysqli_query($con, "select id_article, Count(interest_review) from reviews where id_article='$d[id_article]'");
-                                            // $inter = $r['interest_review'];
-                                            $val1 = $d['interest_review'];
-                                        ?>
-                                        
                                         <td>
-                                            <span class="badge bg-danger"><?php echo $val1; ?></span>
+                                            <span class="badge bg-danger"><?php echo $d['review_article']; ?></span>
                                         </td>
                                     </tr>
                                     <?php } ?>

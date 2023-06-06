@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2023 pada 14.56
+-- Waktu pembuatan: 06 Jun 2023 pada 02.29
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -33,7 +33,8 @@ CREATE TABLE `articles` (
   `title_article` varchar(40) NOT NULL,
   `slug_article` varchar(40) NOT NULL,
   `desc_article` longtext NOT NULL,
-  `id_user` int(3) NOT NULL,
+  `review_article` int(10) NOT NULL,
+  `username` varchar(40) NOT NULL,
   `id_category` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,10 +42,14 @@ CREATE TABLE `articles` (
 -- Dumping data untuk tabel `articles`
 --
 
-INSERT INTO `articles` (`id_article`, `cover_article`, `title_article`, `slug_article`, `desc_article`, `id_user`, `id_category`) VALUES
-(1, 'Avengers_Age_of_Ultron_poster.jpg', 'Hahakaka', 'hahakaka', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aspernatur, voluptatem rerum sit tempore sunt aliquam praesentium officiis recusandae quas alias consectetur voluptate expedita in ipsum quia! Cumque, libero voluptas.', 1, 1),
-(2, 'asus.jpeg', 'Jma', 'jma', 'mkjenvak', 7, 2),
-(6, 'Avengers_Infinity_War.jpg', 'kai', 'kai', 'kaikaikia', 7, 2);
+INSERT INTO `articles` (`id_article`, `cover_article`, `title_article`, `slug_article`, `desc_article`, `review_article`, `username`, `id_category`) VALUES
+(1, 'Avengers_Age_of_Ultron_poster.jpg', 'Hahakaka', 'hahakaka', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem aspernatur, voluptatem rerum sit tempore sunt aliquam praesentium officiis recusandae quas alias consectetur voluptate expedita in ipsum quia! Cumque, libero voluptas.', 35, 'wali', 1),
+(2, 'FC-Register.drawio.png', 'Jmaaa', 'jmaaa', 'mkjenvak', 37, 'dapit', 2),
+(6, 'Avengers_Infinity_War.jpg', 'kai', 'kai', 'kaikaikia', 34, 'dapit', 2),
+(7, 'acer.jpeg', 'Acer', 'acer', 'awewdawi awifawifmfi seufirugj skrgn sugrs,gjsr isug,siguj gis,ejosj fsygyfsbfhjef iughsk gbskhbf skefb skjefb ekbfh wfjb ajkfekasjef ajefn jknf sk', 26, 'dapit', 4),
+(11, 'DFD-1.drawio.png', 'Dfd', 'dfd', 'dfdfdfdfdfd', 6, 'dapit', 11),
+(12, 'ERD.drawio.png', 'Erd', 'erd', 'erderederedered', 7, 'dapit', 2),
+(13, 'FC-Crud.drawio.png', 'Crud', 'crud', 'cascsacadfaew', 3, 'dapit', 12);
 
 -- --------------------------------------------------------
 
@@ -65,7 +70,16 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id_category`, `name_category`, `slug_category`) VALUES
 (1, 'Political', 'political'),
 (2, 'Food', 'food'),
-(4, 'Traffic', 'traffic');
+(4, 'Traffic', 'traffic'),
+(5, 'Sience', 'sience'),
+(6, 'National', 'national'),
+(7, 'International', 'international'),
+(8, 'Finance', 'finance'),
+(9, 'Sports', 'sports'),
+(10, 'Technology', 'technology'),
+(11, 'Automotive', 'automotive'),
+(12, 'Entertaiment', 'entertaiment'),
+(13, 'Lifestyle', 'lifestyle');
 
 -- --------------------------------------------------------
 
@@ -92,7 +106,7 @@ CREATE TABLE `reports` (
 CREATE TABLE `reviews` (
   `id_review` int(3) NOT NULL,
   `user_review` varchar(40) NOT NULL,
-  `interest_review` int(10) NOT NULL,
+  `review_article` int(10) NOT NULL,
   `id_article` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -100,7 +114,7 @@ CREATE TABLE `reviews` (
 -- Dumping data untuk tabel `reviews`
 --
 
-INSERT INTO `reviews` (`id_review`, `user_review`, `interest_review`, `id_article`) VALUES
+INSERT INTO `reviews` (`id_review`, `user_review`, `review_article`, `id_article`) VALUES
 (1, 'brian', 1, 2),
 (2, 'brian', 1, 2);
 
@@ -170,13 +184,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_article` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_category` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `reports`

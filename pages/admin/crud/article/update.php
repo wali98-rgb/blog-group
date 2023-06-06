@@ -168,7 +168,7 @@
                                             where articles.id_category=categories.id_category
                                         ");
 
-                                        $cate = mysqli_query($con, "select * from categories");
+                                        $cate = mysqli_query($con, "select * from categories order by name_category asc");
                                     ?>
                                     <!-- Check Category List End -->
                                     
@@ -178,7 +178,7 @@
                                     <?php
                                         // while ($cat = mysqli_fetch_array($category)) {
                                         foreach ($cate as $cat) {
-                                            if ($cat['id_category'] === $art['id_article']) {
+                                            if ($cat['id_category'] === $art['id_category']) {
                                     ?>
 
                                         <option selected value="<?php echo $cat['id_category']; ?>"><?php echo $cat['name_category']; ?></option>
@@ -208,7 +208,7 @@
                                     <?php
                                         include "../../../../connection/connection.php";
 
-                                        $user = mysqli_query($con, "select * from users where level='Journalist'");
+                                        $user = mysqli_query($con, "select * from users where level='Journalist' order by username asc");
                                     ?>
                                     <!-- Check Category List End -->
                                     
@@ -218,18 +218,18 @@
                                     <?php
                                         // while ($cat = mysqli_fetch_array($category)) {
                                         foreach ($user as $us) {
-                                            if ($us['id_user'] === $art['id_article']) {
+                                            if ($us['username'] === $art['username']) {
                                     ?>
 
-                                        <option selected value="<?php echo $us['id_user']; ?>"><?php echo $us['username']; ?></option>
+                                        <option selected value="<?php echo $us['username']; ?>"><?php echo $us['username']; ?></option>
 
                                     <?php while ($u = mysqli_fetch_array($user)) { ?>
 
-                                        <option value="<?php echo $u['id_user'] ?>"><?php echo $u['username']; ?></option>
+                                        <option value="<?php echo $u['username'] ?>"><?php echo $u['username']; ?></option>
 
                                     <?php }} else { ?>
                                         <!-- <option selected disabled>-- Select Publisher --</option> -->
-                                        <option value="<?php echo $us['id_user']; ?>"><?php echo $us['username']; ?></option>
+                                        <option value="<?php echo $us['username']; ?>"><?php echo $us['username']; ?></option>
 
                                     <?php }} ?>
                                     </select>

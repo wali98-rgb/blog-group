@@ -145,12 +145,10 @@
                             $check = mysqli_num_rows($dat);
                             if ($check > 0) {
                                 $data = mysqli_query($con, "select
-                                        articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_user, articles.id_category,
-                                        categories.id_category, categories.name_category, categories.slug_category,
-                                        users.id_user, users.username
-                                        from articles, categories, users
+                                        articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.review_article, articles.username, articles.id_category,
+                                        categories.id_category, categories.name_category, categories.slug_category
+                                        from articles, categories
                                         where articles.id_category=categories.id_category
-                                        and articles.id_user=users.id_user
                                         order by articles.title_article asc
                                     ");
 

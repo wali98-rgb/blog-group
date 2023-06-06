@@ -19,9 +19,13 @@
 
             header('location:../../../admin/index.php');
         } else if ($d['level'] == 'User') {
+            $_SESSION['username'] = $username;
+            $_SESSION['level'] = 'User';
+            $_SESSION['status'] = 'login';
 
             header('location:../../../../auth/login/login.php');
         } else if ($d['level'] == 'Journalist') {
+            $_SESSION['id'] = $d['id_user'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = 'Journalist';
             $_SESSION['status'] = 'login';

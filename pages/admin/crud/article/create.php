@@ -185,7 +185,7 @@
 
                                         <?php while ($us = mysqli_fetch_array($user)) { ?>
 
-                                        <option value="<?php echo $us['id_user']; ?>"><?php echo $us['username']; ?></option>
+                                        <option value="<?php echo $us['username']; ?>"><?php echo $us['username']; ?></option>
 
                                         <?php } ?>
                                     </select>

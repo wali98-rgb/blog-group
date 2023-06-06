@@ -29,7 +29,7 @@ body {
   padding: 0;
   background-color: var(--primary);
   border-bottom: 1px solid var(--bg);
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   line-height: 1;
   width: 100%;
@@ -140,7 +140,8 @@ body {
   justify-content: space-between;
   max-width: 100%;
   margin: 0 auto;
-  margin-top: 8.5%;
+  /* margin-top: 8.5%; */
+  background-color: red;
   padding: 20px;
 }
 

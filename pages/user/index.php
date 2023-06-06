@@ -47,25 +47,42 @@
         </div>
 
         <div class="navbars-nav">
-            <a href="index.html" class="now">Home</a>
-            <a href="display/kategori/nasional.html">National</a>
-            <a href="display/kategori/internasional.html">International</a>
-            <a href="display/kategori/politik.html">Politic</a>
-            <a href="display/kategori/ekonomi.html">Finance</a>
-            <a href="display/kategori/olahraga.html">Sports</a>
-            <a href="display/kategori/teknologi.html">Technology</a>
-            <a href="display/kategori/otomotif.html">Automotive</a>
-            <a href="display/kategori/hiburan.html">Entertaiment</a>
-            <a href="display/kategori/gayahidup.html">LifeStyle</a>
+            <a href="index.php" class="now">Home</a>
+            <?php
+                include "../../connection/connection.php";
+
+                $data_category = mysqli_query($con, "select * from categories order by name_category");
+
+                while ($dc = mysqli_fetch_array($data_category)) {
+            ?>
+            <a href="<?php echo 'display/kategori/category.php#' . $dc['slug_category']; ?>"><?php echo $dc['name_category']; ?></a>
+            <?php } ?>
+            <a href="../../auth/login/login.php">Login</a>
             <?php
                 session_start();
                 if (isset($_SESSION['status'])) {
-                    if ($_SESSION['status'] == "login") {
+                    if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                        echo $_SESSION['username'];
+            ?>
+                        <a href="../journal/article.php">Add Article</a>
+                        <a href="../../auth/logout.php">Logout</a>
+            <?php
+                    } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                        echo $_SESSION['username'];
+            ?>
+                        <a href="../admin/index.php">Kembali</a>
+                        <a href="../../../../auth/logout.php">Logout</a>
+            <?php
+                    } else if ($_SESSION['status'] == "login") {
                         echo $_SESSION['username'];
             ?>
                         <a href="../../auth/logout.php">Logout</a>
             <?php
                     } else if ($_SESSION['status'] != "login") {
+            ?>
+                        <a href="../../auth/login/login.php">Login</a>
+            <?php
+                    } else {
             ?>
                         <a href="../../auth/login/login.php">Login</a>
             <?php
@@ -89,7 +106,7 @@
     <!-- Navbar end -->
     
     <!-- Content Start -->
-    <div class="content-wrapper" style="margin-top: 12rem;">
+    <div class="content-wrapper">
         <section class="content" style="padding: 0 15%">
             <!-- Card Content Start -->
             <div class="container-fluid">
@@ -101,26 +118,50 @@
                                 include "../../connection/connection.php";
 
                                 $data = mysqli_query($con, "select
-                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_user, articles.id_category,
+                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.review_article, articles.username, articles.id_category,
                                     users.id_user, users.username,
                                     categories.id_category, categories.name_category, categories.slug_category
                                     from articles, users, categories
-                                    where articles.id_user=users.id_user
+                                    where articles.username=users.username
                                     and articles.id_category=categories.id_category
                                     and articles.id_article='1'
                                     order by articles.title_article asc
                                 ");
 
+                            
+
                                 while ($dat = mysqli_fetch_array($data)) {
+                                    
                             ?>
                             <img style="object-fit: cover;" src="<?php echo '../admin/crud/article/cover_article/' . $dat['cover_article']; ?>" alt="<?php echo $dat['title_article']; ?>">
-                            <div class="konten" style="text-align: justify; text-decoration: none;">
-                                <a href="show.php?slug=<?php echo $dat['slug_article']; ?>"><?php echo $dat['title_article']; ?></a>
-                                <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $dat['username']; ?></span></small>
-                                <p class="author"><?php echo substr($dat['desc_article'], 0, 200) . "..."; ?></p>
-                                <small style="display: flex; align-items: center;"><label for="">Kategori : &nbsp;</label><span class="text-danger"><?php echo $dat['name_category']; ?></span></small>
-                                <p class="date">17 Mei 2023</p>
-                            </div>
+                                <div class="konten" style="text-align: justify; text-decoration: none;">
+                                    <form action="" method="POST">
+                                        <a href="show.php?slug=<?php echo $dat['slug_article']; ?>"><?php echo $dat['title_article']; ?></a>
+                                        <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $dat['username']; ?></span></small>
+                                        <p class="author"><?php echo substr($dat['desc_article'], 0, 200) . "..."; ?></p>
+                                        <small style="display: flex; align-items: center;"><label for="">Kategori : &nbsp;</label><span class="text-danger"><?php echo $dat['name_category']; ?></span></small>
+                                        <p class="date">17 Mei 2023</p>
+                                        <?php
+                                            $name_slug = $dat['slug_article'];
+
+                                            if (isset($_SESSION['status'])) {
+                                                if ($_SESSION['status'] != "login") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                                        ?>
+                                            <button type="submit" name="<?php echo $name_slug; ?>"><i data-feather="thumbs-up"></i> <?php echo $dat['review_article']; ?></button>
+                                        <?php
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                                                    echo " ";
+                                                } else {
+                                                    echo " ";
+                                                }
+                                            }
+                                        ?>
+                                    </form>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -131,19 +172,17 @@
                         <h3 class="card-title">Berita Lainnya</h3>
                     </div>
                     <!-- Show Article Start -->
-                    <div class="card-body">
+                    <div class="card-body mb-5">
                         <div class="row justify-content-center">
                             <!-- Check Item Database Start -->
                             <?php
                                 include "../../connection/connection.php";
 
                                 $datas = mysqli_query($con, "select
-                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.id_user, articles.id_category,
-                                    users.id_user, users.username,
+                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.review_article, articles.username, articles.id_category,
                                     categories.id_category, categories.name_category, categories.slug_category
-                                    from articles, users, categories
-                                    where articles.id_user=users.id_user
-                                    and articles.id_category=categories.id_category
+                                    from articles, categories
+                                    where articles.id_category=categories.id_category
                                     order by articles.title_article asc
                                 ");
 
@@ -151,20 +190,214 @@
                             ?>
                             <!-- Check Item Database End -->
                             <div class="col-3">
-                                <img style="height: 180px; object-fit: cover; width: 400px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
-                                <hr>
-                                <div class="card-body">
-                                    <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
-                                    <a class="card-title" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
-                                    <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
-                                    <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
-                                </div>
+                                <form action="" method="POST">
+                                    <img style="height: 180px; object-fit: cover; width: 400px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
+                                    <hr>
+                                    <div class="card-body">
+                                        <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
+                                        <a class="card-title" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
+                                        <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
+                                        <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
+                                        <?php
+                                            $name_slug = $d['slug_article'];
+
+                                            if (isset($_SESSION['status'])) {
+                                                if ($_SESSION['status'] != "login") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                                        ?>
+                                            <button type="submit" name="<?php echo $name_slug; ?>"><i data-feather="thumbs-up"></i> <?php echo $d['review_article']; ?></button>
+                                        <?php
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                                                    echo " ";
+                                                } else {
+                                                    echo " ";
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </form>
+
+                                <!-- Review Session Start -->
+                                <?php
+                                    $slug = $d['slug_article'];
+                                    $review = $con->query("select * from articles where slug_article='$slug'");
+
+                                    if (isset($_POST[$name_slug])) {
+                                        while ($wrap = $review->fetch_assoc()) {
+                                            $slugs = $wrap['slug_article'];
+                                            $reviews = $wrap['review_article'];
+
+                                            $jumlah = $reviews + 1;
+                                            $update = $con->query("update articles set review_article='$jumlah' where slug_article='$slugs'");
+                                        }
+                                    }
+                                ?>
+                                <!-- Review Session End -->
                             </div>
                             <?php } ?>
                         </div>
                     </div>
                     <!-- Show Article End -->
                 </div>
+
+                <!-- Article by Category Start -->
+                <div class="card-default">
+                    <div class="card-header mb-3">
+                        <h1 class="card-title">Artikel Berdasarkan Kategori</h1>
+                    </div>
+
+                    <!-- Check Item by Category -->
+                    <!-- Food Category -->
+                    <div class="card-body mb-5">
+                        <h3 style="border-left: 3px solid red; padding: 0 0 0 5px">Kategori Food</h3>
+                        <hr>
+                        <div class="row justify-content-center">
+                            <!-- Check Item Database Start -->
+                            <?php
+                                include "../../connection/connection.php";
+
+                                $datas = mysqli_query($con, "select
+                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.review_article, articles.username, articles.id_category,
+                                    categories.id_category, categories.name_category, categories.slug_category
+                                    from articles, categories
+                                    where articles.id_category=categories.id_category
+                                    and categories.name_category='Food'
+                                    order by articles.title_article asc
+                                ");
+
+                                while ($d = mysqli_fetch_array($datas)) {
+                            ?>
+                            <!-- Check Item Database End -->
+                            <div class="col-3">
+                                <form action="" method="POST">
+                                    <img style="height: 180px; object-fit: cover; width: 400px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
+                                    <hr>
+                                    <div class="card-body">
+                                        <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
+                                        <a class="card-title" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
+                                        <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
+                                        <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
+                                        <?php
+                                            $name_slug = $d['slug_article'];
+
+                                            if (isset($_SESSION['status'])) {
+                                                if ($_SESSION['status'] != "login") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                                        ?>
+                                            <button type="submit" name="<?php echo $name_slug; ?>"><i data-feather="thumbs-up"></i> <?php echo $d['review_article']; ?></button>
+                                        <?php
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                                                    echo " ";
+                                                } else {
+                                                    echo " ";
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </form>
+
+                                <!-- Review Session Start -->
+                                <?php
+                                    $slug = $d['slug_article'];
+                                    $review = $con->query("select * from articles where slug_article='$slug'");
+
+                                    if (isset($_POST[$name_slug])) {
+                                        while ($wrap = $review->fetch_assoc()) {
+                                            $slugs = $wrap['slug_article'];
+                                            $reviews = $wrap['review_article'];
+
+                                            $jumlah = $reviews + 1;
+                                            $update = $con->query("update articles set review_article='$jumlah' where slug_article='$slugs'");
+                                        }
+                                    }
+                                ?>
+                                <!-- Review Session End -->
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Political Category -->
+                    <div class="card-body mb-5">
+                        <h3 style="border-left: 3px solid yellow; padding: 0 0 0 5px">Kategori Political</h3>
+                        <hr>
+                        <div class="row justify-content-center">
+                            <!-- Check Item Database Start -->
+                            <?php
+                                include "../../connection/connection.php";
+
+                                $datas = mysqli_query($con, "select
+                                    articles.id_article, articles.cover_article, articles.title_article, articles.slug_article, articles.desc_article, articles.review_article, articles.username, articles.id_category,
+                                    categories.id_category, categories.name_category, categories.slug_category
+                                    from articles, categories
+                                    where articles.id_category=categories.id_category
+                                    and categories.name_category='Political'
+                                    order by articles.title_article asc
+                                ");
+
+                                while ($d = mysqli_fetch_array($datas)) {
+                            ?>
+                            <!-- Check Item Database End -->
+                            <div class="col-3">
+                                <form action="" method="POST">
+                                    <img style="height: 180px; object-fit: cover; width: 400px;" class="card-img-top img-thumbnail rounded mx-auto mt-3" src="<?php echo '../admin/crud/article/cover_article/' . $d['cover_article']; ?>" alt="<?php echo $d['title_article']; ?>">
+                                    <hr>
+                                    <div class="card-body">
+                                        <a style="display: block; text-align: right; text-decoration: none;" href="category.php?slug=<?php echo $d['slug_category']; ?>" class="text-danger text-right"><?php echo $d['name_category']; ?></a>
+                                        <a class="card-title" href="show.php?slug=<?php echo $d['slug_article']; ?>"><h3><?php echo $d['title_article']; ?></h3></a>
+                                        <small style="display: flex; align-items: center;"><label for="">Penerbit : &nbsp;</label><span class="badge bg-success"><?php echo $d['username']; ?></span></small>
+                                        <p style="text-align: justify;" class="card-text"><?php echo substr($d['desc_article'], 0, 100) . "..."; ?></p>
+                                        <?php
+                                            $name_slug = $d['slug_article'];
+
+                                            if (isset($_SESSION['status'])) {
+                                                if ($_SESSION['status'] != "login") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "User") {
+                                        ?>
+                                            <button type="submit" name="<?php echo $name_slug; ?>"><i data-feather="thumbs-up"></i> <?php echo $d['review_article']; ?></button>
+                                        <?php
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Admin") {
+                                                    echo " ";
+                                                } else if ($_SESSION['status'] == "login" && $_SESSION['level'] == "Journalist") {
+                                                    echo " ";
+                                                } else {
+                                                    echo " ";
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </form>
+
+                                <!-- Review Session Start -->
+                                <?php
+                                    $slug = $d['slug_article'];
+                                    $review = $con->query("select * from articles where slug_article='$slug'");
+
+                                    if (isset($_POST[$name_slug])) {
+                                        while ($wrap = $review->fetch_assoc()) {
+                                            $slugs = $wrap['slug_article'];
+                                            $reviews = $wrap['review_article'];
+
+                                            $jumlah = $reviews + 1;
+                                            $update = $con->query("update articles set review_article='$jumlah' where slug_article='$slugs'");
+                                        }
+                                    }
+                                ?>
+                                <!-- Review Session End -->
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <!-- Check Item by Category -->
+                </div>
+                <!-- Article by Category End -->
             </div>
             <!-- Card Content End -->
         </section>

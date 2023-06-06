@@ -139,7 +139,7 @@
                 while ($d = mysqli_fetch_array($data)) {
                 ?>
                     <div>
-                        <a href="/category#<?php echo $d['slug_category']; ?>">
+                        <a href="crud/category/category.php#<?php echo $d['slug_category']; ?>">
                             <?php echo $d['name_category']; ?>
                         </a>
                     </div>

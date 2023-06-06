@@ -144,7 +144,7 @@
                                 <?php
                                 include "../../../../connection/connection.php";
 
-                                $data = mysqli_query($con, "select * from categories");
+                                $data = mysqli_query($con, "select * from categories order by name_category");
 
                                 $no = 1;
                                 while ($d = mysqli_fetch_array($data)) {
@@ -152,8 +152,8 @@
 
                                     <tr align="center">
                                         <td><?php echo $no++; ?></td>
-                                        <td>
-                                            <?php echo $d['name_category']; ?>
+                                        <td id="<?php echo $d['slug_category']; ?>">
+                                            <label for=""><?php echo $d['name_category']; ?></label>
                                         </td>
                                         <td>
                                             <?php echo $d['slug_category']; ?>

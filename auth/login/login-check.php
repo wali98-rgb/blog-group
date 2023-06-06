@@ -25,6 +25,7 @@
 
             header('location:../../pages/user/index.php');
         } else if ($d['level'] == 'Journalist') {
+            $_SESSION['id'] = $d['id_user'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = 'Journalist';
             $_SESSION['status'] = 'login';
